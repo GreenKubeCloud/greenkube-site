@@ -54,14 +54,14 @@ jobs:
 
             printf 'Nginx: '
             command -v nginx
-            if nginx -t; then
+            if nginx -t -g 'pid /tmp/greenkube-nginx-preflight.pid;'; then
               printf 'Nginx configuration test: passed\n'
             else
               printf 'Nginx configuration test could not run as the deployment user\n'
             fi
 
             printf 'Nginx configuration owning GreenKube hostnames:\n'
-            nginx -T 2>&1 | awk '
+            nginx -T -g 'pid /tmp/greenkube-nginx-preflight.pid;' 2>&1 | awk '
               /^# configuration file / { config = $0 }
               /server_name[[:space:]].*greenkube\.cloud/ {
                 print config
@@ -86,4 +86,11 @@ jobs:
               fi
             else
               printf 'Certbot: not installed\n'
+            fi
+
+            if command -v openssl >/dev/null 2>&1; then
+              printf 'Apex TLS certificate:\n'
+              openssl x509 \
+                -in /etc/letsencrypt/live/greenkube.cloud/fullchain.pem \
+                -noout -subject -ext subjectAltName -enddate
             fi

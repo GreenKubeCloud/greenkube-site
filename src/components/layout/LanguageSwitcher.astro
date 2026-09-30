@@ -1,0 +1,29 @@
+---
+import type { Locale, PageId } from '../../content/types';
+import type { UiCopy } from '../../content/i18n/types';
+import { localizedPath } from '../../content/types';
+
+type Props = {
+  locale: Locale;
+  page: PageId;
+  ui: UiCopy;
+};
+
+const { locale, page, ui } = Astro.props;
+---
+
+<nav class="language-switch" aria-label={ui.languageLabel}>
+  {
+    (['en', 'fr'] as const).map((language) =>
+      language === locale ? (
+        <span lang={language} aria-current="page">
+          {language.toUpperCase()}
+        </span>
+      ) : (
+        <a href={localizedPath(language, page)} lang={language}>
+          {language.toUpperCase()}
+        </a>
+      ),
+    )
+  }
+</nav>

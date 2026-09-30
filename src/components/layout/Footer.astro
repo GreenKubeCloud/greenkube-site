@@ -1,0 +1,67 @@
+---
+import type { Locale } from '../../content/types';
+import type { UiCopy } from '../../content/i18n/types';
+import { pageIds, localizedPath } from '../../content/types';
+import { externalUrls } from '../../content/urls';
+
+type Props = {
+  locale: Locale;
+  ui: UiCopy;
+};
+
+const { locale, ui } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__top">
+    <div class="site-footer__identity">
+      <a class="wordmark wordmark--footer" href={localizedPath(locale, 'home')}>
+        <span class="wordmark__mark" aria-hidden="true">G</span>
+        <span>GreenKube</span>
+      </a>
+      <p>{ui.footerSummary}</p>
+    </div>
+    <div>
+      <h2 class="footer-heading">{ui.footerProject}</h2>
+      <ul class="footer-links">
+        {
+          pageIds.map((page) => (
+            <li>
+              <a href={localizedPath(locale, page)}>{ui.pageLabels[page]}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-heading">{ui.footerResources}</h2>
+      <ul class="footer-links">
+        <li>
+          <a href={externalUrls.docs} target="_blank" rel="noreferrer">
+            {ui.docsLink} ↗
+            <span class="visually-hidden"> ({ui.externalLinkLabel})</span></a
+          >
+        </li>
+        <li>
+          <a href={externalUrls.github} target="_blank" rel="noreferrer">
+            {ui.githubLink} ↗
+            <span class="visually-hidden"> ({ui.externalLinkLabel})</span></a
+          >
+        </li>
+        <li>
+          <a href={externalUrls.demo} target="_blank" rel="noreferrer">
+            {ui.demoLink} ↗
+            <span class="visually-hidden"> ({ui.externalLinkLabel})</span></a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__bottom">
+    <p>{ui.copyright}</p>
+    <a href={externalUrls.license} target="_blank" rel="noreferrer">
+      {ui.openSourceLabel} ↗
+      <span class="visually-hidden"> ({ui.externalLinkLabel})</span></a
+    >
+  </div>
+</footer>

@@ -1,0 +1,82 @@
+---
+import type { Locale, PageContent } from '../../content/types';
+import type { UiCopy } from '../../content/i18n/types';
+import ContentSection from './ContentSection.astro';
+import LinkButton from './LinkButton.astro';
+
+type Props = {
+  locale: Locale;
+  content: PageContent;
+  ui: UiCopy;
+};
+
+const { locale, content, ui } = Astro.props;
+---
+
+<main id="main">
+  <section class="page-hero">
+    <div
+      class:list={[
+        'container',
+        'page-hero__grid',
+        content.hero.workflow ? '' : 'page-hero__grid--single',
+      ]}
+    >
+      <div class="page-hero__copy">
+        <p class="eyebrow">{content.hero.eyebrow}</p>
+        <h1>{content.hero.title}</h1>
+        <p class="page-hero__summary">{content.hero.summary}</p>
+        {content.hero.note && <p class="hero-note">{content.hero.note}</p>}
+        <div class="page-hero__actions">
+          {
+            content.hero.actions.map((link, index) => (
+              <LinkButton
+                link={link}
+                locale={locale}
+                ui={ui}
+                variant={
+                  index === 0 ? 'primary' : index === 1 ? 'secondary' : 'text'
+                }
+              />
+            ))
+          }
+        </div>
+      </div>
+      {
+        content.hero.workflow && (
+          <figure class="workflow-visual">
+            <figcaption class="visually-hidden">
+              {content.hero.title}
+            </figcaption>
+            <ol>
+              {content.hero.workflow.map((item) => (
+                <li>
+                  <span class="workflow-visual__node" aria-hidden="true" />
+                  <span>
+                    <strong>{item.title}</strong>
+                    <small>{item.description}</small>
+                  </span>
+                  {item.status && <em>{item.status}</em>}
+                </li>
+              ))}
+            </ol>
+          </figure>
+        )
+      }
+    </div>
+    {
+      content.id === 'home' && (
+        <div class="container trust-line">
+          {ui.trustItems.map((item) => (
+            <span>{item}</span>
+          ))}
+        </div>
+      )
+    }
+  </section>
+  {
+    content.sections.map((section) => (
+      <ContentSection section={section} locale={locale} ui={ui} />
+    ))
+  }
+</main>

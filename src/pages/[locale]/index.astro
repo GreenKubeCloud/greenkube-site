@@ -1,0 +1,21 @@
+---
+import MarketingLayout from '../../layouts/MarketingLayout.astro';
+import PageRenderer from '../../components/shared/PageRenderer.astro';
+import { englishPages } from '../../content/pages/en';
+import { frenchPages } from '../../content/pages/fr';
+import { englishUi } from '../../content/i18n/en';
+import { frenchUi } from '../../content/i18n/fr';
+import type { Locale } from '../../content/types';
+
+export function getStaticPaths() {
+  return [{ params: { locale: 'en' } }, { params: { locale: 'fr' } }];
+}
+
+const locale: Locale = Astro.params.locale === 'fr' ? 'fr' : 'en';
+const content = locale === 'en' ? englishPages.home : frenchPages.home;
+const ui = locale === 'en' ? englishUi : frenchUi;
+---
+
+<MarketingLayout locale={locale} content={content} ui={ui}>
+  <PageRenderer locale={locale} content={content} ui={ui} />
+</MarketingLayout>

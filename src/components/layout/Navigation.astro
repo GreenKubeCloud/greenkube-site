@@ -1,0 +1,37 @@
+---
+import type { Locale, PageId } from '../../content/types';
+import type { UiCopy } from '../../content/i18n/types';
+import { localizedPath } from '../../content/types';
+import { externalUrls } from '../../content/urls';
+
+type Props = {
+  locale: Locale;
+  page: PageId;
+  ui: UiCopy;
+};
+
+const { locale, page, ui } = Astro.props;
+---
+
+<nav aria-label={ui.navigationLabel}>
+  <ul class="navigation-list">
+    {
+      ui.navigation.map((item) => (
+        <li>
+          <a
+            href={localizedPath(locale, item.page)}
+            aria-current={item.page === page ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+    <li>
+      <a href={externalUrls.docs} target="_blank" rel="noreferrer">
+        {ui.docsLink}<span aria-hidden="true"> ↗</span>
+        <span class="visually-hidden"> ({ui.externalLinkLabel})</span>
+      </a>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,83 @@
+---
+import type { Locale, PageContent } from '../content/types';
+import type { UiCopy } from '../content/i18n/types';
+import { localizedPath } from '../content/types';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import '../styles/global.css';
+
+type Props = {
+  locale: Locale;
+  content: PageContent;
+  ui: UiCopy;
+};
+
+const { locale, content, ui } = Astro.props;
+const canonical = new URL(localizedPath(locale, content.id), Astro.site);
+const englishAlternate = new URL(localizedPath('en', content.id), Astro.site);
+const frenchAlternate = new URL(localizedPath('fr', content.id), Astro.site);
+const alternateLocale = locale === 'en' ? 'fr_FR' : 'en_US';
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'GreenKube',
+    url: 'https://greenkube.cloud/',
+    knowsAbout: [
+      'Open-source Kubernetes optimization',
+      'Kubernetes cost, energy and carbon estimates',
+    ],
+    sameAs: ['https://github.com/GreenKubeCloud/GreenKube'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'GreenKube',
+    url: 'https://greenkube.cloud/',
+    inLanguage: ['en', 'fr'],
+    publisher: { '@type': 'Organization', name: 'GreenKube' },
+  },
+];
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="description" content={content.description} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="alternate" hreflang="en" href={englishAlternate.href} />
+    <link rel="alternate" hreflang="fr" href={frenchAlternate.href} />
+    <link rel="alternate" hreflang="x-default" href={englishAlternate.href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="GreenKube" />
+    <meta property="og:title" content={content.title} />
+    <meta property="og:description" content={content.description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:locale" content={locale === 'en' ? 'en_US' : 'fr_FR'} />
+    <meta property="og:locale:alternate" content={alternateLocale} />
+    <meta property="og:image" content="https://greenkube.cloud/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ui.ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={content.title} />
+    <meta name="twitter:description" content={content.description} />
+    <meta name="twitter:image" content="https://greenkube.cloud/og-image.png" />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(structuredData)}
+    />
+    <title>{content.title}</title>
+  </head>
+  <body>
+    <Header locale={locale} page={content.id} ui={ui} />
+    <slot />
+    <Footer locale={locale} ui={ui} />
+  </body>
+</html>

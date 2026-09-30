@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f5f7f4"/>
+  <path d="M0 0h18v630H0z" fill="#146f52"/>
+  <g fill="#182923" font-family="Arial, sans-serif">
+    <text x="92" y="190" font-size="34" font-weight="700">GreenKube</text>
+    <text x="92" y="292" font-size="58" font-weight="700">Kubernetes optimization,</text>
+    <text x="92" y="362" font-size="58" font-weight="700">from evidence to change.</text>
+    <text x="92" y="445" font-size="27" fill="#62706a">Open source · Self-hosted · Cost, capacity and carbon</text>
+  </g>
+  <g fill="none" stroke="#146f52" stroke-width="4">
+    <path d="M99 525h100m20 0h100m20 0h100m20 0h100m20 0h100m20 0h100"/>
+    <circle cx="99" cy="525" r="13" fill="#f5f7f4"/>
+    <circle cx="219" cy="525" r="13" fill="#f5f7f4"/>
+    <circle cx="339" cy="525" r="13" fill="#f5f7f4"/>
+    <circle cx="459" cy="525" r="13" fill="#f5f7f4"/>
+    <circle cx="579" cy="525" r="13" fill="#f5f7f4"/>
+    <circle cx="699" cy="525" r="13" fill="#f5f7f4"/>
+  </g>
+</svg>

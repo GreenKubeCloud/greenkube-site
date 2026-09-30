@@ -1,0 +1,40 @@
+---
+import MarketingLayout from '../../layouts/MarketingLayout.astro';
+import PageRenderer from '../../components/shared/PageRenderer.astro';
+import { englishPages } from '../../content/pages/en';
+import { frenchPages } from '../../content/pages/fr';
+import { englishUi } from '../../content/i18n/en';
+import { frenchUi } from '../../content/i18n/fr';
+import { pageIds, routeSuffixes, type Locale } from '../../content/types';
+
+const pagesByLocale = { en: englishPages, fr: frenchPages };
+const uiByLocale = { en: englishUi, fr: frenchUi };
+
+export function getStaticPaths() {
+  const locales = ['en', 'fr'] as const;
+  return locales.flatMap((locale) =>
+    pageIds
+      .filter((page) => page !== 'home')
+      .map((page) => ({
+        params: { locale, slug: routeSuffixes[page].replace(/\/$/, '') },
+        props: { page },
+      })),
+  );
+}
+
+const locale: Locale = Astro.params.locale === 'fr' ? 'fr' : 'en';
+const page = pageIds.find(
+  (pageId) => routeSuffixes[pageId].replace(/\/$/, '') === Astro.params.slug,
+);
+if (!page || page === 'home') {
+  throw new Error(
+    `No marketing page content for /${locale}/${Astro.params.slug}/`,
+  );
+}
+const content = pagesByLocale[locale][page];
+const ui = uiByLocale[locale];
+---
+
+<MarketingLayout locale={locale} content={content} ui={ui}>
+  <PageRenderer locale={locale} content={content} ui={ui} />
+</MarketingLayout>

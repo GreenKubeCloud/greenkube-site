@@ -1,0 +1,22 @@
+# GreenKube
+
+GreenKube is an open-source Kubernetes project for cost visibility and estimated energy and carbon reporting. It is designed to be self-hosted. Workload carbon values are estimates, not direct physical measurements.
+
+## Canonical website
+- https://greenkube.cloud/
+
+## Product pages
+- [Product overview](https://greenkube.cloud/en/)
+- [Carbon estimates and methodology](https://greenkube.cloud/en/carbon/)
+- [Use cases](https://greenkube.cloud/en/use-cases/)
+- [Optimization and verification method](https://greenkube.cloud/en/method/)
+- [Community](https://greenkube.cloud/en/community/)
+- [Optional services](https://greenkube.cloud/en/services/)
+
+## Public resources
+- [Technical documentation](https://docs.greenkube.cloud/)
+- [Interactive demo](https://demo.greenkube.cloud/)
+- [GitHub repository](https://github.com/GreenKubeCloud/GreenKube)
+- [GitHub discussions](https://github.com/GreenKubeCloud/GreenKube/discussions)
+
+The GitOps pull-request and post-change verification workflow is a preview on `dev`, not a released 0.3.0 capability. See the documentation for current supported behavior and carbon-estimation limitations.

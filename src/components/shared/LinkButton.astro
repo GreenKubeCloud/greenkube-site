@@ -1,0 +1,26 @@
+---
+import type { ContentLink, Locale } from '../../content/types';
+import type { UiCopy } from '../../content/i18n/types';
+import { contentLinkHref, isExternalLink } from '../../content/links';
+
+type Props = {
+  link: ContentLink;
+  locale: Locale;
+  ui: UiCopy;
+  variant?: 'primary' | 'secondary' | 'text';
+};
+
+const { link, locale, ui, variant = 'secondary' } = Astro.props;
+const external = isExternalLink(link);
+---
+
+<a
+  class:list={['button', `button--${variant}`]}
+  href={contentLinkHref(link, locale)}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noreferrer' : undefined}
+  aria-label={external ? `${link.label} (${ui.externalLinkLabel})` : undefined}
+>
+  {link.label}
+  {external && <span aria-hidden="true">↗</span>}
+</a>

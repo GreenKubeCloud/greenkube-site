@@ -1,0 +1,179 @@
+---
+import type {
+  ContentSection as SectionContent,
+  Locale,
+} from '../../content/types';
+import type { UiCopy } from '../../content/i18n/types';
+import { contentLinkHref, isExternalLink } from '../../content/links';
+
+type Props = {
+  section: SectionContent;
+  locale: Locale;
+  ui: UiCopy;
+};
+
+const { section, locale, ui } = Astro.props;
+---
+
+<section
+  class:list={[
+    'content-section',
+    `content-section--${section.presentation}`,
+    section.id === 'open-source' ? 'content-section--dark' : '',
+  ]}
+  id={section.id}
+>
+  <div class="container">
+    <header class="section-heading">
+      {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+      <h2>{section.title}</h2>
+      {
+        section.introduction && (
+          <p class="section-lead">{section.introduction}</p>
+        )
+      }
+    </header>
+    {
+      section.presentation === 'data-flow' && section.items && (
+        <ol class="data-flow">
+          {section.items.map((item) => (
+            <li>
+              <strong>{item.title}</strong>
+              <span>{item.description}</span>
+            </li>
+          ))}
+        </ol>
+      )
+    }
+    {
+      section.presentation === 'steps' && section.items && (
+        <ol class="steps-list">
+          {section.items.map((item, index) => (
+            <li class="step-item">
+              <span class="step-number">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                {item.detail && <p class="detail-text">{item.detail}</p>}
+                {item.status && <span class="status-label">{item.status}</span>}
+              </div>
+            </li>
+          ))}
+        </ol>
+      )
+    }
+    {
+      (section.presentation === 'cards' ||
+        section.presentation === 'outcomes') &&
+        section.items && (
+          <ul
+            class:list={[
+              'content-cards',
+              section.presentation === 'outcomes'
+                ? 'content-cards--outcomes'
+                : '',
+            ]}
+          >
+            {section.items.map((item) => (
+              <li class="content-card">
+                {item.status && <span class="status-label">{item.status}</span>}
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                {item.detail && <p class="detail-text">{item.detail}</p>}
+              </li>
+            ))}
+          </ul>
+        )
+    }
+    {
+      (section.presentation === 'diff' ||
+        section.presentation === 'data-flow') &&
+        section.code && (
+          <figure
+            class:list={[
+              'diff-panel',
+              section.presentation === 'data-flow' ? 'diagram-panel' : '',
+            ]}
+          >
+            <figcaption>{section.code.filename}</figcaption>
+            <pre>
+              <code>{section.code.lines.join('\n')}</code>
+            </pre>
+          </figure>
+        )
+    }
+    {
+      section.presentation === 'table' && section.table && (
+        <div
+          class="table-scroll"
+          role="region"
+          tabindex="0"
+          aria-label={section.table.caption ?? section.title}
+        >
+          <table>
+            {section.table.caption && (
+              <caption>{section.table.caption}</caption>
+            )}
+            <thead>
+              <tr>
+                {section.table.headers.map((header) => (
+                  <th scope="col">{header}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {section.table.rows.map((row) => (
+                <tr>
+                  {row.map((cell) => (
+                    <td>{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )
+    }
+    {
+      section.paragraphs && (
+        <div class="section-prose">
+          {section.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      )
+    }
+    {
+      section.presentation === 'callout' && section.notice && (
+        <aside class="notice" aria-label={section.title}>
+          <p>{section.notice}</p>
+        </aside>
+      )
+    }
+    {
+      section.links && section.links.length > 0 && (
+        <ul class="section-links">
+          {section.links.map((link) => (
+            <li>
+              <a
+                href={contentLinkHref(link, locale)}
+                target={isExternalLink(link) ? '_blank' : undefined}
+                rel={isExternalLink(link) ? 'noreferrer' : undefined}
+                aria-label={
+                  isExternalLink(link)
+                    ? `${link.label} (${ui.externalLinkLabel})`
+                    : undefined
+                }
+              >
+                {link.label}
+                {isExternalLink(link) && <span aria-hidden="true"> ↗</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>

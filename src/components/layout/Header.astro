@@ -1,0 +1,79 @@
+---
+import type { Locale, PageId } from '../../content/types';
+import type { UiCopy } from '../../content/i18n/types';
+import { localizedPath } from '../../content/types';
+import { externalUrls } from '../../content/urls';
+import Navigation from './Navigation.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+type Props = {
+  locale: Locale;
+  page: PageId;
+  ui: UiCopy;
+};
+
+const { locale, page, ui } = Astro.props;
+---
+
+<a class="skip-link" href="#main">{ui.skipLink}</a>
+<header class="site-header">
+  <div class="site-header__inner container">
+    <a
+      class="wordmark"
+      href={localizedPath(locale, 'home')}
+      aria-label="GreenKube"
+    >
+      <span class="wordmark__mark" aria-hidden="true">G</span>
+      <span>GreenKube</span>
+    </a>
+    <div class="site-header__desktop">
+      <Navigation locale={locale} page={page} ui={ui} />
+      <div class="header-actions">
+        <a
+          class="header-github"
+          href={externalUrls.github}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {ui.githubLink}<span aria-hidden="true"> ↗</span>
+          <span class="visually-hidden"> ({ui.externalLinkLabel})</span>
+        </a>
+        <a
+          class="button button--primary header-demo"
+          href={externalUrls.demo}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {ui.demoLink}<span aria-hidden="true"> ↗</span>
+          <span class="visually-hidden"> ({ui.externalLinkLabel})</span>
+        </a>
+        <LanguageSwitcher locale={locale} page={page} ui={ui} />
+      </div>
+    </div>
+    <details class="mobile-navigation">
+      <summary aria-label={ui.mobileMenu}>{ui.mobileMenu}</summary>
+      <div class="mobile-navigation__panel">
+        <Navigation locale={locale} page={page} ui={ui} />
+        <a
+          class="mobile-navigation__external"
+          href={externalUrls.github}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {ui.githubLink}<span aria-hidden="true"> ↗</span>
+          <span class="visually-hidden"> ({ui.externalLinkLabel})</span>
+        </a>
+        <a
+          class="button button--primary"
+          href={externalUrls.demo}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {ui.demoLink}<span aria-hidden="true"> ↗</span>
+          <span class="visually-hidden"> ({ui.externalLinkLabel})</span>
+        </a>
+        <LanguageSwitcher locale={locale} page={page} ui={ui} />
+      </div>
+    </details>
+  </div>
+</header>

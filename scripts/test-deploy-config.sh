@@ -51,4 +51,11 @@ if [ "$wildcard_count" -ne 1 ]; then
   exit 1
 fi
 
+grep -Fq \
+  'include /etc/nginx/snippets/greenkube-legacy-redirects.conf;' \
+  deploy/nginx-greenkube-sites.conf
+grep -Fq \
+  'snippet="/host-nginx/snippets/greenkube-legacy-redirects.conf"' \
+  scripts/deploy-vps.sh
+
 sh -n scripts/deploy-vps.sh

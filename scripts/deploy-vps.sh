@@ -220,7 +220,7 @@ if ! docker run --rm \
     release="/host-www/greenkube-site/releases/$deployment_id"
     config="/host-nginx/sites-available/greenkube.cloud"
     backup="/host-nginx/.greenkube-site-backups/greenkube.cloud.$deployment_id"
-    snippet="/host-nginx/snippets/greenkube-site-legacy-redirects.conf"
+    snippet="/host-nginx/snippets/greenkube-legacy-redirects.conf"
     current=/host-www/greenkube-site/current
     next="$current.new.$deployment_id"
 

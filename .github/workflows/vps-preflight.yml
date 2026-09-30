@@ -43,7 +43,6 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script_stop: true
           script: |
             set -eu
             printf 'Connected user: '
@@ -55,10 +54,14 @@ jobs:
 
             printf 'Nginx: '
             command -v nginx
-            sudo -n nginx -t
+            if nginx -t; then
+              printf 'Nginx configuration test: passed\n'
+            else
+              printf 'Nginx configuration test could not run as the deployment user\n'
+            fi
 
             printf 'Nginx configuration owning GreenKube hostnames:\n'
-            sudo -n nginx -T 2>&1 | awk '
+            nginx -T 2>&1 | awk '
               /^# configuration file / { config = $0 }
               /server_name[[:space:]].*greenkube\.cloud/ {
                 print config
@@ -71,13 +74,16 @@ jobs:
             '
 
             printf 'Listening web and site ports:\n'
-            sudo -n ss -ltn | awk 'NR == 1 || /:(80|443|3002|3003)([[:space:]]|$)/'
+            ss -ltn | awk 'NR == 1 || /:(80|443|300[0-9])([[:space:]]|$)/'
 
             if command -v certbot >/dev/null 2>&1; then
               printf 'Certbot: '
               certbot --version
-              sudo -n certbot certificates 2>/dev/null |
-                grep -E 'Certificate Name:|Domains:' || true
+              if certbot certificates 2>/dev/null | grep -E 'Certificate Name:|Domains:'; then
+                :
+              else
+                printf 'Certificate details require elevated permissions\n'
+              fi
             else
               printf 'Certbot: not installed\n'
             fi

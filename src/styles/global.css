@@ -185,15 +185,11 @@ textarea {
   color: var(--color-green);
 }
 
-.wordmark__mark {
-  display: grid;
+.wordmark__logo {
+  flex: 0 0 auto;
   width: 2rem;
   height: 2rem;
-  place-items: center;
-  border-radius: 6px;
-  background: var(--color-green);
-  color: white;
-  font-size: 1rem;
+  object-fit: contain;
 }
 
 .site-header__desktop,

@@ -23,7 +23,13 @@ const { locale, page, ui } = Astro.props;
       href={localizedPath(locale, 'home')}
       aria-label="GreenKube"
     >
-      <span class="wordmark__mark" aria-hidden="true">G</span>
+      <img
+        class="wordmark__logo"
+        src="/greenkube-logo.png"
+        alt=""
+        width="32"
+        height="32"
+      />
       <span>GreenKube</span>
     </a>
     <div class="site-header__desktop">

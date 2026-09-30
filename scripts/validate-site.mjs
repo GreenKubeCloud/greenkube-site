@@ -90,6 +90,18 @@ for (const route of pageRoutes) {
   const linkTags = [...html.matchAll(/<link\b[^>]*>/g)].map((match) =>
     attributes(match[0]),
   );
+  const faviconLink = linkTags.find((link) => link.rel === 'icon');
+  report(
+    faviconLink?.href === '/favicon.ico',
+    `${route} is missing the GreenKube favicon`,
+  );
+  const brandImages = [...html.matchAll(/<img\b[^>]*>/g)]
+    .map((match) => attributes(match[0]))
+    .filter((image) => image.src === '/greenkube-logo.png');
+  report(
+    brandImages.length === 2 && brandImages.every((image) => image.alt === ''),
+    `${route} is missing the decorative GreenKube header/footer logos`,
+  );
   for (const link of linkTags) {
     if (link.rel === 'stylesheet' && link.href) stylesheetPaths.add(link.href);
   }
@@ -339,6 +351,10 @@ report(
 );
 const socialImage = await readDistBuffer('og-image.png');
 report(Boolean(socialImage), 'Missing the generated Open Graph image');
+const brandLogo = await readDistBuffer('greenkube-logo.png');
+report(Boolean(brandLogo), 'Missing the GreenKube logo asset');
+const favicon = await readDistBuffer('favicon.ico');
+report(Boolean(favicon), 'Missing the GreenKube favicon asset');
 
 const redirectProposal = await readProjectFile('deploy/nginx-redirects.md');
 report(Boolean(redirectProposal), 'Missing operator redirect proposal');

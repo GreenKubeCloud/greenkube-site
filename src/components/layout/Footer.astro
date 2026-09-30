@@ -16,7 +16,13 @@ const { locale, ui } = Astro.props;
   <div class="container site-footer__top">
     <div class="site-footer__identity">
       <a class="wordmark wordmark--footer" href={localizedPath(locale, 'home')}>
-        <span class="wordmark__mark" aria-hidden="true">G</span>
+        <img
+          class="wordmark__logo"
+          src="/greenkube-logo.png"
+          alt=""
+          width="32"
+          height="32"
+        />
         <span>GreenKube</span>
       </a>
       <p>{ui.footerSummary}</p>

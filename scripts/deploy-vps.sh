@@ -167,20 +167,7 @@ restore_release() {
       ' sh "$deployment_id" "$previous_release"
 }
 
-run_host_nginx() {
-    case "$1" in
-      test)
-        host_command='chroot /host /usr/sbin/nginx -t'
-        ;;
-      reload)
-        host_command='chroot /host /usr/sbin/nginx -s reload'
-        ;;
-      *)
-        printf 'Unknown Nginx operation: %s\n' "$1" >&2
-        return 2
-        ;;
-    esac
-
+run_nginx_test() {
     docker run --rm \
       --pid=host \
       --mount type=bind,src=/,dst=/host,readonly \
@@ -188,15 +175,20 @@ run_host_nginx() {
       --mount type=bind,src=/var/log/nginx,dst=/host/var/log/nginx \
       --entrypoint /bin/sh \
       "$nginx_image" \
-      -c "$host_command"
-}
-
-run_nginx_test() {
-    run_host_nginx test
+      -c 'chroot /host /usr/sbin/nginx -t'
 }
 
 run_nginx_reload() {
-    run_host_nginx reload
+    docker run --rm \
+      --pid=host \
+      --privileged \
+      --userns=host \
+      --mount type=bind,src=/,dst=/host,readonly \
+      --mount type=bind,src=/run,dst=/host/run \
+      --mount type=bind,src=/var/log/nginx,dst=/host/var/log/nginx \
+      --entrypoint /bin/sh \
+      "$nginx_image" \
+      -c 'chroot /host /usr/sbin/nginx -s reload'
 }
 
 rollback_and_reload() {

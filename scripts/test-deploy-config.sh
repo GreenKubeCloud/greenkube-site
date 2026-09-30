@@ -58,4 +58,18 @@ grep -Fq \
   'snippet="/host-nginx/snippets/greenkube-legacy-redirects.conf"' \
   scripts/deploy-vps.sh
 
+nginx_reload=$(
+  awk '
+    /^run_nginx_reload\(\) \{/ { in_reload = 1 }
+    in_reload { print }
+    in_reload && /^}/ { exit }
+  ' scripts/deploy-vps.sh
+)
+for option in '--pid=host' '--privileged' '--userns=host'; do
+  if ! printf '%s\n' "$nginx_reload" | grep -Fq -- "$option"; then
+    printf 'Nginx reload helper is missing required Docker option: %s\n' "$option" >&2
+    exit 1
+  fi
+done
+
 sh -n scripts/deploy-vps.sh

@@ -23,5 +23,92 @@ jobs:
       - run: pnpm lint
       - run: pnpm check
       - run: pnpm format:check
+      - run: sh scripts/test-deploy-config.sh
       - run: pnpm build
       - run: pnpm validate:site
+      - uses: actions/upload-artifact@v4
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          name: greenkube-site-dist
+          path: dist/
+          if-no-files-found: error
+          retention-days: 1
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: greenkube-production-deploy
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/download-artifact@v4
+        with:
+          name: greenkube-site-dist
+          path: dist/
+      - name: Package static site and routing configuration
+        run: |
+          tar -czf site-deployment.tar.gz \
+            dist \
+            deploy/nginx-greenkube-sites.conf \
+            deploy/nginx-legacy-redirects.conf \
+            deploy/update-nginx.awk
+      - name: Verify VPS deployment secrets are available
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USERNAME: ${{ secrets.VPS_USERNAME }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          set -eu
+          if [ -z "$VPS_HOST" ] || [ -z "$VPS_USERNAME" ] || [ -z "$VPS_SSH_KEY" ] || [ -z "$SSH_PORT" ]; then
+            echo "::error::VPS deployment secrets are not available to this repository."
+            exit 1
+          fi
+      - uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: site-deployment.tar.gz,scripts/deploy-vps.sh
+          target: /tmp/greenkube-site-deploy/${{ github.run_id }}-${{ github.run_attempt }}
+          overwrite: true
+      - uses: appleboy/ssh-action@v1
+        env:
+          DEPLOY_SHA: ${{ github.sha }}
+          DEPLOY_ID: ${{ github.run_id }}-${{ github.run_attempt }}
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          envs: DEPLOY_SHA,DEPLOY_ID
+          script: |
+            set -eu
+            DEPLOY_DIR="/tmp/greenkube-site-deploy/$DEPLOY_ID"
+            sh "$DEPLOY_DIR/scripts/deploy-vps.sh" "$DEPLOY_SHA" "$DEPLOY_ID" "$DEPLOY_DIR"
+      - name: Verify deployed public domains
+        run: |
+          set -eu
+          root_redirect=$(curl --fail --silent --show-error --max-time 30 \
+            --output /dev/null --write-out '%{http_code} %{redirect_url}' \
+            'https://greenkube.cloud/?ci-check=1')
+          test "$root_redirect" = '308 https://greenkube.cloud/en/?ci-check=1'
+
+          www_redirect=$(curl --fail --silent --show-error --max-time 30 \
+            --output /dev/null --write-out '%{http_code} %{redirect_url}' \
+            'https://www.greenkube.cloud/en/?ci-check=1')
+          test "$www_redirect" = '308 https://greenkube.cloud/en/?ci-check=1'
+
+          curl --fail --silent --show-error --retry 5 --retry-delay 2 \
+            --max-time 30 https://greenkube.cloud/en/ -o /dev/null
+          curl --fail --silent --show-error --retry 5 --retry-delay 2 \
+            --max-time 30 https://greenkube.cloud/fr/ -o /dev/null
+          curl --fail --silent --show-error --retry 5 --retry-delay 2 \
+            --max-time 30 https://greenkube.cloud/greenkube-logo.png -o /dev/null
+          curl --fail --silent --show-error --retry 5 --retry-delay 2 \
+            --max-time 30 https://greenkube.cloud/favicon.ico -o /dev/null
+          curl --fail --silent --show-error --retry 5 --retry-delay 2 \
+            --max-time 30 https://docs.greenkube.cloud/ -o /dev/null

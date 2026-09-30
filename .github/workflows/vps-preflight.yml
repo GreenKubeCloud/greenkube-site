@@ -55,11 +55,6 @@ jobs:
 
             printf 'Nginx: '
             command -v nginx
-            if nginx -t; then
-              printf 'Nginx configuration test: passed\n'
-            else
-              printf 'Nginx configuration test could not run as the deployment user\n'
-            fi
 
             printf 'Nginx configuration files with GreenKube hostnames:\n'
             nginx_image=$(docker inspect --format '{{.Image}}' greenkube-website)
@@ -71,6 +66,9 @@ jobs:
 
             printf 'Listening web and site ports:\n'
             ss -ltn | awk 'NR == 1 || /:(80|443|300[0-9])([[:space:]]|$)/'
+
+            printf 'Curl: '
+            command -v curl
 
             if command -v certbot >/dev/null 2>&1; then
               printf 'Certbot: '

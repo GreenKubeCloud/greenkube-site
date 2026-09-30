@@ -23,7 +23,6 @@ export type UiCopy = {
   footerProject: string;
   footerResources: string;
   externalLinkLabel: string;
-  previewBadge: string;
   openSourceLabel: string;
   copyright: string;
   trustItems: string[];

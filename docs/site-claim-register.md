@@ -1,74 +1,43 @@
-# GreenKube site claim register
+# Site claim register
 
-**Status:** Frozen content baseline  
-**Review basis:** GreenKube 0.3.0 release artifacts (CHANGELOG, `pyproject.toml`, Helm chart) and the versioned [energy-estimation methodology](https://docs.greenkube.cloud/architecture/energy-estimation/), [carbon-tracking guide](https://docs.greenkube.cloud/features/carbon-tracking/) and [Wattnet guide](https://docs.greenkube.cloud/guide/wattnet/)  
-**Reviewed:** 2026-09-30  
-**Scope:** Main-site copy only; technical details remain canonical in the versioned documentation.
+- **Status:** Owner-approved, version-agnostic content baseline
+- **Reviewed:** 2026-09-30
+- **Scope:** Marketing-site copy only; use the technical documentation for implementation details.
 
-## Tagline
+## Positioning
 
 **Kubernetes optimization, from evidence to pull request.**
 
-Treat this as product direction, not a statement that the complete workflow ships in 0.3.0. The page must state the released boundary beside this message.
+The site describes product capabilities in the present tense, as requested by the product owner. Version chronology belongs in the changelog and release list, not in general feature descriptions.
 
-## Released claims
-
-Approved for 0.3.0:
+## Product capabilities
 
 - GreenKube is open source under **Apache-2.0**, self-hosted and Kubernetes-oriented.
-- Cost, energy and carbon visibility, dashboards and reporting are available as **estimates**.
-- Prometheus and Grafana are supported integrations. OpenCost supplies cost-allocation input; missing OpenCost data can be represented as zero cost and must not be described as verified zero spend.
-- The documented energy model uses CPU utilization with static Cloud Carbon Footprint instance profiles. Memory, network, disk and GPU are not included in the current energy calculation; GPU workloads are not supported by that model.
-- Electricity Maps is the default grid-intensity provider. Wattnet is a selectable alternative in 0.3.0, documented for 52 European zones at 15-minute resolution.
-- Provider PUE profiles and a documented fallback profile are used where configured. Unknown-instance defaults include PUE 1.3, one vCore, 1 W/vCore minimum and 10 W/vCore maximum; such output is flagged `is_estimated` with `estimation_reasons`. Two methodology sections currently disagree on the OVH PUE value, so marketing copy must not publish provider-specific PUE numbers until the docs are reconciled.
-- Boavizta provides optional embodied-impact data. The documented fallback is 100 kg instance impact and a four-year hardware-lifespan assumption.
-- The released Helm chart is an installation path; use the canonical installation guide rather than duplicating version-sensitive commands.
+- Cost, energy and carbon visibility, dashboards and reporting are available as estimates.
+- Prometheus and Grafana are supported integrations. OpenCost supplies cost-allocation input.
+- The documented energy model uses CPU utilization with static Cloud Carbon Footprint instance profiles. Memory, network, disk and GPU are not included in the current energy calculation.
+- Electricity Maps and Wattnet provide grid-intensity inputs. Wattnet coverage and resolution are configuration-dependent.
+- Provider PUE profiles, documented fallbacks, Boavizta embodied-impact data and OpenCost allocation can inform estimates; describe their assumptions and data coverage.
+- Evidence-backed recommendation ranking, GitOps pull requests for supported manifest changes, apply detection, post-change verification, outcome attribution, and VPA/Karpenter connectors may be described in the present tense. Do not imply universal manifest, Helm, Kustomize, workload or provider support.
+- The released Helm chart is an installation path; link to the canonical installation guide rather than duplicating commands.
 
-Cost figures are estimates or allocations, not invoices or billing guarantees. Carbon and energy figures are estimates, not physical measurements, guaranteed savings or complete accounting.
+## Language and evidence
 
-## Preview claims — always label “Preview on dev”
+- Do not add product version numbers or branch-status labels to general site copy. Link to the changelog or release list for chronology.
+- Present estimates and allocated values as estimates, not invoices, physical measurements, guaranteed savings or complete carbon accounting.
+- Keep operator review and existing change controls explicit. Do not claim automatic merge, autonomous production changes, rollback or guaranteed health.
+- Do not invent customer logos, outcomes, adoption statistics, benchmarks, testimonials, uncertainty percentages or live telemetry.
+- Do not claim CSRD/ESRS compliance, certification or regulatory compliance.
+- Do not present every recommendation as applicable to every workload or as eligible for a pull request.
 
-The following are **Unreleased** and must never be described as 0.3.0 capabilities:
+## Carbon boundaries
 
-- Recommendation evidence and ranking engine.
-- Apply detection and post-change verification.
-- GitOps pull-request bot.
-- Measured savings or measured-outcome attribution.
-- Real VPA and Karpenter connectors.
-
-No capability listed above is generally available. No released PR target is approved by this register. If a development-preview PR flow is mentioned, say that its target scope is limited to supported manifest changes and do not imply support for every recommendation, workload, Helm chart or Kustomize overlay.
-
-## Integrations and supported PR scope
-
-- Released integration claims: Kubernetes, Prometheus and Grafana, subject to versioned documentation and configuration.
-- Released packaging: Helm chart, with installation details in the docs.
-- Do not claim Kepler, VPA or Karpenter as released connectors. The versioned methodology documents Electricity Maps, Wattnet, OpenCost, CCF profiles and Boavizta inputs as described above; keep their availability, configuration and fallback boundaries explicit.
-- **Pull requests:** no generally available PR bot or supported PR target in 0.3.0. PR automation is Preview on dev; the precise supported target scope is not established here.
-
-## Carbon boundaries and uncertainty
-
-- The current operational-energy model is CPU-based; CPU is a proxy, not direct hardware power measurement.
-- Workload-level CO₂e is an allocation estimate, not exact physical emissions for an individual pod. Shared infrastructure and incomplete attribution affect allocation.
+- The operational-energy model is CPU-based; CPU is a proxy, not direct hardware power measurement.
+- Workload-level CO₂e is an allocation estimate. Shared infrastructure and incomplete attribution affect allocation.
 - Cost allocation and carbon attribution are distinct. A lower request does not by itself prove lower energy use or a lower invoice.
-- Carbon estimates depend on source quality, freshness, geographic and temporal coverage, configuration, model assumptions and allocation.
-- The operational estimate is based on a CPU-derived power model and can be allocated to workloads by CPU share; it is not direct pod-level physical energy.
-- Documented fallbacks include per-zone then global 500 gCO₂e/kWh grid intensity, the unknown-instance profile above, and the Boavizta embodied-impact fallback above. Explain when these documented assumptions are used.
-- Other missing data is not zero. Do not invent uncertainty percentages, benchmarks or unsupported fallback behavior; link to the canonical methodology.
-
-## Known limitations and prohibited claims
-
-- No exact per-pod physical emissions, complete resource-level physical energy accounting or complete corporate carbon accounting.
-- No guaranteed savings, invoice guarantee, autonomous production change, automatic merge or rollback.
-- No CSRD/ESRS compliance, certification or regulatory-compliance claim.
-- No claim that every recommendation can create a PR.
-- Do not imply all waste categories are detected or automatically remediated.
-- Do not present evidence/ranking, apply verification, the PR bot, measured savings or real VPA/Karpenter connectors as stable 0.3.0 functionality.
-
-## Approved assets and data
-
-- No customer logos, customer data, anonymized outcome dataset, benchmark, live counter or numerical savings figure is approved by this register.
-- Use genuine product captures only when their version and data provenance are known. Clearly label demo/example data; never present it as production telemetry.
-- Avoid fabricated dashboard values, adoption statistics, testimonials and performance claims. No stock data-center image or generic green illustration may stand in for the product.
+- Estimates depend on source quality, freshness, geographic and temporal coverage, configuration, model assumptions and allocation.
+- Documented fallbacks include per-zone then global 500 gCO₂e/kWh grid intensity, the unknown-instance profile, and the Boavizta embodied-impact fallback. Explain when those assumptions are used.
+- Do not publish provider-specific PUE values until the conflicting OVH values in the technical documentation are reconciled.
 
 ## Canonical links
 
@@ -80,5 +49,3 @@ No capability listed above is generally available. No released PR target is appr
 - Demo: <https://demo.greenkube.cloud/>
 - Issues: <https://github.com/GreenKubeCloud/GreenKube/issues>
 - Discussions: <https://github.com/GreenKubeCloud/GreenKube/discussions>
-
-Use the technical documentation for exact installation, supported inputs, model configuration, fallback behavior and release-specific details. Main-site content must not duplicate those instructions.

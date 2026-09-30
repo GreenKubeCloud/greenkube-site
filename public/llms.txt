@@ -19,4 +19,4 @@ GreenKube is an open-source Kubernetes project for cost visibility and estimated
 - [GitHub repository](https://github.com/GreenKubeCloud/GreenKube)
 - [GitHub discussions](https://github.com/GreenKubeCloud/GreenKube/discussions)
 
-The GitOps pull-request and post-change verification workflow is a preview on `dev`, not a released 0.3.0 capability. See the documentation for current supported behavior and carbon-estimation limitations.
+GreenKube supports evidence-backed recommendations, GitOps pull requests for supported manifest changes, and post-change verification. Operators review and merge proposed changes. See the documentation for supported integrations, configuration, and carbon-estimation limitations.

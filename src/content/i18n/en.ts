@@ -32,7 +32,6 @@ export const en: UiCopy = {
   footerProject: 'Project',
   footerResources: 'Resources',
   externalLinkLabel: 'opens in a new tab',
-  previewBadge: 'Preview on dev',
   openSourceLabel: 'Open source · Apache-2.0',
   copyright: 'GreenKube is open-source software licensed under Apache-2.0.',
   trustItems: [

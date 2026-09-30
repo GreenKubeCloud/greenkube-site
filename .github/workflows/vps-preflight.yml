@@ -1,6 +1,7 @@
 name: VPS Preflight
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -8,6 +9,8 @@ on:
       - '.github/workflows/vps-preflight.yml'
       - 'deploy/**'
       - 'Dockerfile'
+      - 'src/**'
+      - 'package.json'
 
 permissions:
   contents: read
@@ -16,7 +19,24 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
+      - name: Check organization secret access
+        id: secrets
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USERNAME: ${{ secrets.VPS_USERNAME }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          set -eu
+          if [ -z "$VPS_HOST" ] || [ -z "$VPS_USERNAME" ] || [ -z "$VPS_SSH_KEY" ] || [ -z "$SSH_PORT" ]; then
+            echo "::warning::VPS preflight skipped because one or more organization secrets are not available to this repository."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Inspect VPS prerequisites without changing the host
+        if: steps.secrets.outputs.ready == 'true'
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}

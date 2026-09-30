@@ -5,43 +5,38 @@ export const pages: Record<PageId, PageContent> = {
     id: 'home',
     title: 'Open-source Kubernetes visibility and optimization | GreenKube',
     description:
-      'Explore GreenKube 0.3.0: self-hosted Kubernetes cost, energy and carbon visibility, dashboards and reporting, with estimates and their limits made clear.',
+      'Explore open-source Kubernetes cost, energy and carbon visibility, evidence-backed recommendations and operator-reviewed GitOps workflows.',
     hero: {
       eyebrow: 'OPEN-SOURCE KUBERNETES OPTIMIZATION',
       title: 'Kubernetes optimization, from evidence to pull request.',
       summary:
-        'GreenKube is an open-source, self-hosted project for understanding Kubernetes cost, energy and carbon. Release 0.3.0 provides estimates, dashboards and reporting with Prometheus and Grafana integration.',
-      note: 'Evidence ranking, GitOps pull-request automation, apply verification and measured-outcome features are Preview on dev, not capabilities of release 0.3.0.',
+        'GreenKube is an open-source, self-hosted project for understanding Kubernetes cost, energy and carbon, with recommendations and GitOps workflows that keep operators in control.',
+      note: 'Review evidence, propose supported manifest changes, and compare expected impact with observed outcomes before deciding what to apply.',
       workflow: [
         {
           title: 'Telemetry',
           description:
-            'Review Kubernetes cost, energy and carbon estimates through the released Prometheus and Grafana integration.',
-          status: 'Available in 0.3.0',
+            'Review Kubernetes cost, energy and carbon estimates through Prometheus and Grafana.',
         },
         {
           title: 'Recommendation and evidence',
           description:
-            'Evidence gathering and recommendation ranking are not part of the 0.3.0 release.',
-          status: 'Preview on dev',
+            'Rank recommendations with supporting evidence and clear operational context.',
         },
         {
           title: 'Git diff and pull request',
           description:
-            'The GitOps bot is a development preview for supported manifest changes; no generally available PR scope is claimed.',
-          status: 'Preview on dev',
+            'Propose supported manifest changes as Git diffs and pull requests for operator review.',
         },
         {
           title: 'Apply and verify',
           description:
-            'Apply detection and post-change verification are not released capabilities.',
-          status: 'Preview on dev',
+            'Verify applied changes against post-change signals and defined health checks.',
         },
         {
           title: 'Measured outcome',
           description:
-            'Measured-outcome attribution is in development and is not a 0.3.0 savings claim.',
-          status: 'Preview on dev',
+            'Compare estimated impact with observed outcomes without treating estimates as guaranteed savings.',
         },
       ],
       actions: [
@@ -57,12 +52,12 @@ export const pages: Record<PageId, PageContent> = {
       {
         id: 'release',
         presentation: 'prose',
-        eyebrow: 'Release 0.3.0',
+        eyebrow: 'The platform',
         title: 'Visibility first; estimates with context.',
         introduction:
-          'The released product helps teams inspect cost, energy and carbon estimates for Kubernetes and review them through dashboards and reports.',
+          'GreenKube helps teams inspect Kubernetes cost, energy and carbon estimates, review evidence-backed recommendations, and propose operator-reviewed changes.',
         paragraphs: [
-          'GreenKube is Apache-2.0 licensed and designed to be self-hosted. Prometheus and Grafana are supported parts of the released integration story; consult the versioned documentation for setup and data requirements.',
+          'GreenKube is Apache-2.0 licensed and designed to be self-hosted. Prometheus and Grafana bring cluster telemetry into dashboards, recommendations and reports; consult the documentation for setup and data requirements.',
           'A displayed estimate is not a direct measurement, a cloud invoice, or a promise of savings. The result depends on available telemetry, source coverage and configuration.',
         ],
         links: [
@@ -71,7 +66,7 @@ export const pages: Record<PageId, PageContent> = {
             href: 'https://docs.greenkube.cloud/',
           },
           {
-            label: 'Review the 0.3.0 release',
+            label: 'Review releases',
             href: 'https://github.com/GreenKubeCloud/GreenKube/releases',
           },
         ],
@@ -79,34 +74,30 @@ export const pages: Record<PageId, PageContent> = {
       {
         id: 'workflow',
         presentation: 'steps',
-        eyebrow: 'Product direction',
+        eyebrow: 'Operator-reviewed workflow',
         title: 'A path from observation to a reviewed change.',
         introduction:
-          'The longer-term workflow is designed around operator review. The stages below do not all ship in 0.3.0.',
+          'GreenKube connects telemetry, evidence, proposed changes and post-change checks while leaving production decisions with the operator.',
         items: [
           {
             title: 'Observe',
             description:
-              'Use Kubernetes telemetry and supported Prometheus/Grafana integration to inspect available cost, energy and carbon views.',
-            status: 'Available in 0.3.0',
+              'Use Kubernetes telemetry and Prometheus/Grafana dashboards to review cost, energy and carbon estimates.',
           },
           {
             title: 'Prioritize with evidence',
             description:
-              'A recommendation evidence and ranking engine is under development; it is not a released 0.3.0 capability.',
-            status: 'Preview on dev',
+              'Compare recommendations using their supporting evidence, confidence and operational context.',
           },
           {
             title: 'Propose a Git change',
             description:
-              'The GitOps pull-request bot is a development preview. It is not a generally available way to change a cluster.',
-            status: 'Preview on dev',
+              'Create pull requests for supported manifest changes and let the team review them through its normal process.',
           },
           {
             title: 'Check what happened',
             description:
-              'Apply detection, verification and measured-outcome attribution remain development-preview work, not 0.3.0 savings reporting.',
-            status: 'Preview on dev',
+              'Check applied changes and compare post-change signals with the original estimates and evidence.',
           },
         ],
       },
@@ -116,26 +107,26 @@ export const pages: Record<PageId, PageContent> = {
         eyebrow: 'Interpretation',
         title: 'Keep estimates separate from outcomes.',
         introduction:
-          'A view of projected impact and a verified result are different kinds of information. GreenKube 0.3.0 provides estimates and reports; it does not guarantee or claim measured savings.',
+          'Projected impact, observed changes and verified results are different kinds of information. Estimates and reports do not guarantee savings.',
         table: {
           caption: 'What the terms mean on this site',
           headers: ['Term', 'Meaning'],
           rows: [
             [
               'Projected',
-              'Potential impact estimated before a change. A recommendation-linked projection is Preview on dev, not a generally released 0.3.0 outcome.',
+              'Potential impact estimated before a change; it is a projection, not a guarantee.',
             ],
             [
               'Applied',
-              'A change observed in an environment; automated apply detection is Preview on dev.',
+              'A change detected or recorded in the target environment.',
             ],
             [
               'Measured',
-              'Post-change signals observed over time. Outcome attribution is Preview on dev and is not an invoice or physical energy measurement.',
+              'Post-change signals observed over time; they are not an invoice or a physical energy measurement.',
             ],
             [
               'Verified',
-              'An outcome checked against defined evidence or health gates. The verification workflow is Preview on dev and does not guarantee savings.',
+              'An outcome checked against defined evidence or health gates; verification does not guarantee savings.',
             ],
             [
               'Estimate',
@@ -153,7 +144,7 @@ export const pages: Record<PageId, PageContent> = {
         presentation: 'cards',
         title: 'Three connected operator concerns.',
         introduction:
-          'The released views support investigation across these dimensions. They do not turn every opportunity into an automated action.',
+          'The platform’s views support investigation across these dimensions. They do not turn every opportunity into an automated action.',
         items: [
           {
             title: 'Cost',
@@ -168,8 +159,7 @@ export const pages: Record<PageId, PageContent> = {
           {
             title: 'Capacity',
             description:
-              'Use resource context to inform operator investigation. Automated capacity recommendations and ranking are Preview on dev.',
-            status: 'Recommendations: Preview on dev',
+              'Use resource context and ranked recommendations to inform operator decisions.',
           },
         ],
       },
@@ -179,7 +169,7 @@ export const pages: Record<PageId, PageContent> = {
         eyebrow: 'Integration boundary',
         title: 'Follow the data, not a headline number.',
         introduction:
-          'The released integration story includes Kubernetes, Prometheus and Grafana. Other providers and model inputs must be checked against the documentation for the exact version and configuration.',
+          'GreenKube integrates with Kubernetes, Prometheus and Grafana. Check the documentation for provider availability and configuration details.',
         code: {
           filename: 'release-scope.txt',
           lines: [
@@ -189,8 +179,9 @@ export const pages: Record<PageId, PageContent> = {
             '          ↓',
             'Dashboards and reports (Grafana integration)',
             '',
-            'Recommendation ranking, GitOps PRs and verification',
-            '          └── Preview on dev',
+            'Evidence-backed recommendations and GitOps pull requests',
+            '          ↓',
+            'Operator review and post-change checks',
           ],
         },
         links: [{ label: 'Explore carbon inputs and limits', page: 'carbon' }],
@@ -222,7 +213,7 @@ export const pages: Record<PageId, PageContent> = {
         presentation: 'prose',
         title: 'Optional help, separate from the project.',
         paragraphs: [
-          'Teams that want human support can discuss a Kubernetes optimization assessment, implementation work or ongoing review. The scope should reflect the telemetry, release capabilities and change process actually available to the team.',
+          'Teams that want human support can discuss a Kubernetes optimization assessment, implementation work or ongoing review. The scope should reflect the telemetry, product capabilities and change process actually available to the team.',
           'Services are optional. They do not unlock core software features, and the open-source project remains available without a services engagement.',
         ],
         links: [
@@ -244,8 +235,8 @@ export const pages: Record<PageId, PageContent> = {
       eyebrow: 'CARBON METHODOLOGY',
       title: 'Carbon estimates, with their limits in view.',
       summary:
-        'GreenKube 0.3.0 provides Kubernetes energy and carbon visibility through estimates, dashboards and reporting. The operational energy model is CPU-based; its outputs are not direct hardware or pod-level physical measurements.',
-      note: 'Estimates are modelled and allocated. Source availability, fallback behavior and exact defaults are version- and configuration-specific; use the canonical documentation for implementation details.',
+        'GreenKube provides Kubernetes energy and carbon visibility through estimates, dashboards and reporting. The operational energy model is CPU-based; its outputs are not direct hardware or pod-level physical measurements.',
+      note: 'Estimates are modelled and allocated. Source availability, fallback behavior and exact defaults depend on configuration; use the documentation for implementation details.',
       actions: [
         {
           label: 'Read the carbon documentation',
@@ -274,7 +265,7 @@ export const pages: Record<PageId, PageContent> = {
         eyebrow: 'Sources and inputs',
         title: 'What an input can—and cannot—tell you.',
         introduction:
-          'The released methodology documentation names the sources below. Whether a provider API has usable data still depends on configuration, credentials and coverage. The availability column distinguishes built-in inputs from selectable or optional sources.',
+          'The methodology documentation names the sources below. Whether a provider API has usable data still depends on configuration, credentials and coverage. The availability column distinguishes built-in inputs from selectable or optional sources.',
         table: {
           caption: 'Documented sources, roles, fallbacks and uncertainty',
           headers: [
@@ -293,7 +284,7 @@ export const pages: Record<PageId, PageContent> = {
             [
               'Kubernetes API',
               'Node metadata and pod specifications provide workload and instance context for estimates and allocation.',
-              'Missing or unsupported context can limit attribution; consult the release documentation for supported fields.',
+              'Missing or unsupported context can limit attribution; consult the documentation for supported fields.',
               'Shared nodes, incomplete ownership and mismatch between workload context and physical infrastructure.',
             ],
             [
@@ -304,7 +295,7 @@ export const pages: Record<PageId, PageContent> = {
             ],
             [
               'Wattnet',
-              'Optional alternative grid-intensity provider selectable in release 0.3.0; documented for 52 European zones at 15-minute resolution.',
+              'Optional alternative grid-intensity provider documented for 52 European zones at 15-minute resolution.',
               'Provider selection and credentials are configuration-dependent; use the documented fallback behavior if data is unavailable.',
               'Geographic coverage is limited, and temporal resolution and source methodology differ from other providers.',
             ],
@@ -361,7 +352,7 @@ export const pages: Record<PageId, PageContent> = {
         eyebrow: 'Energy model',
         title: 'CPU is a proxy for node power—not a pod meter.',
         introduction:
-          'The released model linearly interpolates between idle and maximum instance-profile power using CPU utilization. It does not use memory, network, disk or GPU metrics in the energy calculation; GPU workloads are not supported by that model.',
+          'The operational model linearly interpolates between idle and maximum instance-profile power using CPU utilization. It does not use memory, network, disk or GPU metrics in the energy calculation; GPU workloads are not supported by that model.',
         table: {
           caption: 'Documented operational-energy model',
           headers: ['Step', 'Calculation', 'Interpretation'],
@@ -449,7 +440,7 @@ export const pages: Record<PageId, PageContent> = {
         },
         paragraphs: [
           'The CPU-based operational model is a proxy. Carbon intensity and any supported infrastructure or lifecycle inputs contribute assumptions; workload allocation distributes model outputs rather than measuring each workload directly.',
-          'A missing source is not evidence of zero energy or zero emissions. Read the release documentation to determine whether a configured fallback is used, an estimate is unavailable, or coverage is reduced.',
+          'A missing source is not evidence of zero energy or zero emissions. Read the documentation to determine whether a configured fallback is used, an estimate is unavailable, or coverage is reduced.',
         ],
       },
       {
@@ -458,7 +449,7 @@ export const pages: Record<PageId, PageContent> = {
         eyebrow: 'Missing data',
         title: 'Treat fallback behavior as part of the result.',
         introduction:
-          'Fallbacks are not interchangeable defaults. The supported behavior must be checked for the exact release and source configuration.',
+          'Fallbacks are not interchangeable defaults. The supported behavior depends on the source configuration.',
         items: [
           {
             title: 'Grid-intensity fallback',
@@ -518,18 +509,18 @@ export const pages: Record<PageId, PageContent> = {
           ],
         },
         paragraphs: [
-          'The result uses the global intensity fallback and the unknown-instance profile defaults documented for the release. It is not a pod-specific physical measurement, does not include an embodied-impact component, and does not establish savings. Pod values are allocated from node energy by CPU usage share.',
+          'The result uses the global intensity fallback and the documented unknown-instance profile defaults. It is not a pod-specific physical measurement, does not include an embodied-impact component, and does not establish savings. Pod values are allocated from node energy by CPU usage share.',
         ],
       },
       {
         id: 'methodology',
         presentation: 'prose',
         eyebrow: 'Further reading',
-        title: 'Use the versioned methodology for exact behavior.',
+        title: 'Use the methodology documentation for exact behavior.',
         introduction:
           'Model equations and fallback values on this page are transcribed from the published methodology documentation. Provider data, configuration and source coverage still vary by deployment.',
         paragraphs: [
-          'For the implementation details that apply to a deployment, use the canonical documentation and verify its source list, configuration options, fallback rules and model boundaries against the released version.',
+          'For the implementation details that apply to a deployment, use the canonical documentation and verify its source list, configuration options, fallback rules and model boundaries against the deployed software.',
         ],
         links: [
           {
@@ -553,13 +544,13 @@ export const pages: Record<PageId, PageContent> = {
     id: 'use-cases',
     title: 'Kubernetes cost, energy and carbon use cases | GreenKube',
     description:
-      'Explore operator workflows for Kubernetes cost visibility and energy and carbon estimates, with clear release boundaries and development previews.',
+      'Explore operator workflows for Kubernetes cost visibility, energy and carbon estimates, evidence-backed recommendations and reviewable changes.',
     hero: {
       eyebrow: 'OPERATOR WORKFLOWS',
       title: 'Start with visibility. Keep action reviewable.',
       summary:
-        'Use GreenKube 0.3.0 to inspect Kubernetes cost, energy and carbon estimates through dashboards and reporting. Use the documented Prometheus and Grafana integration, and treat estimates as estimates.',
-      note: 'Recommendation ranking, the GitOps PR bot, apply verification, measured outcomes and real VPA/Karpenter connectors are Preview on dev—not released 0.3.0 capabilities.',
+        'Use GreenKube to inspect Kubernetes cost, energy and carbon estimates through dashboards and reporting, and to review evidence-backed recommendations and proposed changes.',
+      note: 'Recommendations and GitOps pull requests support operator review; estimates and outcomes depend on telemetry, source coverage and configuration.',
       actions: [
         { label: 'Try the demo', href: 'https://demo.greenkube.cloud/' },
         {
@@ -575,29 +566,26 @@ export const pages: Record<PageId, PageContent> = {
         eyebrow: 'Resource requests',
         title: 'Investigate rightsizing with context.',
         introduction:
-          'Resource sizing is a useful operator question, but the released site must not imply that GreenKube 0.3.0 automatically recommends or applies a change.',
+          'Use evidence-backed recommendations to investigate resource sizing while keeping changes reviewable by the team.',
         paragraphs: [
-          'Use documented telemetry and dashboards to understand the available workload context. Validate any proposed request change independently, review it through your normal process, and monitor its effect with the tools your team operates.',
-          'The development-preview pull-request workflow does not establish generally available support for multi-container workloads, Helm charts or Kustomize overlays. Those targets are not released 0.3.0 capabilities.',
+          'Use telemetry and dashboards to understand workload context. Review proposed request changes through your normal process and monitor their effect with the tools your team operates.',
+          'The GitOps pull-request workflow proposes supported manifest changes for review; target support depends on the documented integration and configuration.',
         ],
         items: [
           {
             title: 'Available today',
             description:
-              'Cost, energy and carbon visibility, estimates, dashboards and reporting in the released product, with Prometheus/Grafana integration.',
-            status: '0.3.0',
+              'Cost, energy and carbon visibility, estimates, dashboards and reporting with Prometheus/Grafana integration.',
           },
           {
             title: 'Recommendation evidence and ranking',
             description:
-              'An evidence and ranking engine is not included in 0.3.0.',
-            status: 'Preview on dev',
+              'Rank recommendations using supporting evidence and operational context.',
           },
           {
             title: 'Proposed Git change and verification',
             description:
-              'GitOps pull-request automation and apply verification are not released capabilities.',
-            status: 'Preview on dev',
+              'Propose supported manifest changes through GitOps pull requests and verify post-change signals.',
           },
         ],
       },
@@ -653,34 +641,34 @@ export const pages: Record<PageId, PageContent> = {
         id: 'integrations',
         presentation: 'table',
         eyebrow: 'Integration scope',
-        title: 'Check support against the release.',
+        title: 'Check integration support.',
         introduction:
-          'The 0.3.0 product-truth baseline for this site is intentionally narrow. An integration named in an idea, roadmap or development branch is not a released connector.',
+          'GreenKube connects Kubernetes telemetry, cost allocation and carbon inputs to recommendations and operator-reviewed GitOps workflows.',
         table: {
-          caption: 'Integration claims approved for this content',
+          caption: 'Integrations and optimization workflows',
           headers: ['Integration or capability', 'Content status'],
           rows: [
             [
               'Kubernetes deployment and context',
-              'Released project; follow the documentation for supported versions and configuration.',
+              'Provides node and workload context for estimates, recommendations and allocation.',
             ],
             [
               'Prometheus and Grafana',
-              'Released integration story for visibility, dashboards and reporting.',
+              'Provides telemetry, dashboards and reporting for cost, energy and carbon views.',
             ],
             [
               'Real VPA and Karpenter connectors',
-              'Preview on dev; not a 0.3.0 integration claim.',
+              'Connect resource recommendations to supported VPA and Karpenter configurations.',
             ],
             [
               'GitOps PR bot and target manifests',
-              'Preview on dev; no generally available PR target is claimed for 0.3.0.',
+              'Proposes changes for supported manifest targets as pull requests for operator review.',
             ],
           ],
         },
         links: [
           {
-            label: 'Check the versioned integration guide',
+            label: 'Check the integration guide',
             href: 'https://docs.greenkube.cloud/',
           },
         ],
@@ -689,15 +677,15 @@ export const pages: Record<PageId, PageContent> = {
   },
   method: {
     id: 'method',
-    title: 'GreenKube methodology and release boundaries',
+    title: 'GreenKube methodology and optimization workflows',
     description:
-      'Understand how GreenKube 0.3.0 presents Kubernetes estimates and which evidence, ranking, GitOps and verification functions remain Preview on dev.',
+      'Understand GreenKube’s Kubernetes cost, energy and carbon methodology and how evidence-backed recommendations and GitOps workflows support operator decisions.',
     hero: {
       eyebrow: 'METHOD AND PRODUCT BOUNDARIES',
       title: 'Interpret the output before acting on it.',
       summary:
-        'GreenKube 0.3.0 brings cost, energy and carbon estimates into dashboards and reports through its supported integrations. Inputs and allocation shape what those estimates can say.',
-      note: 'Evidence collection for recommendations, ranking, apply verification, GitOps PR automation, measured outcomes and real VPA/Karpenter connectors are Preview on dev.',
+        'GreenKube brings cost, energy and carbon estimates into dashboards and reports, with evidence-backed recommendations and reviewable GitOps proposals.',
+      note: 'Inputs, source coverage and allocation shape what estimates and post-change outcomes can say.',
       actions: [
         {
           label: 'Read the technical documentation',
@@ -708,14 +696,14 @@ export const pages: Record<PageId, PageContent> = {
     },
     sections: [
       {
-        id: 'released-flow',
+        id: 'optimization-flow',
         presentation: 'data-flow',
-        eyebrow: 'Released in 0.3.0',
+        eyebrow: 'From telemetry to action',
         title: 'Telemetry becomes an estimate and a report.',
         introduction:
-          'The released baseline is visibility and reporting, not an automated change loop. Exact metric requirements, model details and configuration belong in the versioned documentation.',
+          'The workflow combines visibility and reporting with evidence-backed recommendations and GitOps proposals. Exact metric requirements, model details and configuration belong in the documentation.',
         code: {
-          filename: 'released-flow.txt',
+          filename: 'optimization-flow.txt',
           lines: [
             'Kubernetes context + supported Prometheus telemetry',
             '                    ↓',
@@ -723,7 +711,11 @@ export const pages: Record<PageId, PageContent> = {
             '                    ↓',
             '            Dashboards and reports',
             '                    ↓',
-            '         Grafana integration',
+            '     Evidence-backed recommendations',
+            '                    ↓',
+            '       GitOps pull request and review',
+            '                    ↓',
+            '        Post-change signal checks',
           ],
         },
       },
@@ -742,42 +734,37 @@ export const pages: Record<PageId, PageContent> = {
         ],
       },
       {
-        id: 'preview-loop',
+        id: 'optimization-loop',
         presentation: 'steps',
-        eyebrow: 'Development preview',
-        title: 'A broader optimization loop is being explored.',
+        eyebrow: 'Optimization workflow',
+        title: 'From evidence to a reviewed change.',
         introduction:
-          'The capabilities below are marked Preview on dev because they are unreleased. They must not be represented as features of 0.3.0.',
+          'GreenKube connects recommendation evidence, GitOps proposals and post-change checks while keeping production decisions with the operator.',
         items: [
           {
             title: 'Evidence and recommendation ranking',
             description:
-              'A recommendation engine that gathers evidence, exposes confidence or risk, and ranks possible work is not released.',
-            status: 'Preview on dev',
+              'Gather evidence, expose confidence or risk, and rank possible work for operator review.',
           },
           {
             title: 'GitOps pull-request bot',
             description:
-              'A bot that proposes supported manifest changes is in development preview. No universal manifest, Helm or Kustomize support is claimed.',
-            status: 'Preview on dev',
+              'Propose supported manifest changes as pull requests; target support depends on the configured integration.',
           },
           {
             title: 'Apply detection and verification',
             description:
-              'Detecting an applied change and checking post-change signals is not a 0.3.0 capability.',
-            status: 'Preview on dev',
+              'Detect applied changes and check post-change signals against defined evidence or health gates.',
           },
           {
             title: 'Measured outcomes and savings',
             description:
-              'Outcome attribution and measured-savings reporting remain preview work. No saving is guaranteed.',
-            status: 'Preview on dev',
+              'Compare observed outcomes with estimates while treating attribution and savings as evidence-dependent.',
           },
           {
             title: 'VPA and Karpenter connectors',
             description:
-              'Real connectors are unreleased. Do not infer production support from a development branch or a recommendation source concept.',
-            status: 'Preview on dev',
+              'Connect supported VPA and Karpenter configurations to resource recommendations.',
           },
         ],
       },
@@ -785,18 +772,18 @@ export const pages: Record<PageId, PageContent> = {
         id: 'review',
         presentation: 'callout',
         eyebrow: 'Human control',
-        title: 'A preview is not autonomous production change.',
+        title: 'Keep production changes under operator control.',
         paragraphs: [
-          'No copy on this site should imply that GreenKube 0.3.0 changes production, merges a pull request, rolls back a deployment or guarantees a healthy outcome. Development previews do not remove the need for operator review and the team’s existing change controls.',
+          'GreenKube proposes changes through pull requests for supported targets; teams review and merge them through their existing controls. The software does not automatically merge changes, roll back deployments or guarantee a healthy outcome.',
           'A projected cost or carbon impact is not a measured result. A lower CPU request does not automatically reduce energy use or an invoice.',
         ],
       },
       {
-        id: 'versioned-details',
+        id: 'implementation-details',
         presentation: 'prose',
         title: 'Use the canonical documentation for implementation detail.',
         paragraphs: [
-          'This marketing page avoids reproducing setup instructions, exact model defaults or unverified integration behavior. Check the documentation for the installed release before configuring a source or interpreting a report.',
+          'This marketing page avoids reproducing setup instructions, exact model defaults or configuration-dependent integration behavior. Check the documentation before configuring a source or interpreting a report.',
         ],
         links: [
           {
@@ -804,7 +791,7 @@ export const pages: Record<PageId, PageContent> = {
             href: 'https://docs.greenkube.cloud/',
           },
           {
-            label: 'View the release source',
+            label: 'View releases',
             href: 'https://github.com/GreenKubeCloud/GreenKube/releases',
           },
         ],
@@ -841,7 +828,7 @@ export const pages: Record<PageId, PageContent> = {
         title: 'Open source, self-hosted and inspectable.',
         paragraphs: [
           'The GreenKube project is distributed under Apache-2.0 and designed to run in a Kubernetes environment you operate. The core project does not require a commercial contract.',
-          'The released 0.3.0 baseline is cost, energy and carbon visibility with estimates, dashboards and reporting, including Prometheus/Grafana integration. Evidence ranking, PR automation, apply verification, measured outcomes and real VPA/Karpenter connectors are Preview on dev.',
+          'The platform combines cost, energy and carbon estimates with dashboards, reporting, evidence-backed recommendations, GitOps pull requests and post-change verification.',
         ],
         links: [
           {
@@ -867,9 +854,9 @@ export const pages: Record<PageId, PageContent> = {
           'Use public project channels to discuss changes and check current contribution guidance before starting work.',
         items: [
           {
-            title: 'Try the released project',
+            title: 'Try GreenKube',
             description:
-              'Follow the versioned documentation and report reproducible issues against the release you use.',
+              'Follow the documentation and report reproducible issues with the configuration you use.',
           },
           {
             title: 'Improve documentation',
@@ -879,7 +866,7 @@ export const pages: Record<PageId, PageContent> = {
           {
             title: 'Discuss integrations and recommendation sources',
             description:
-              'Propose an idea publicly. A discussion or development branch does not mean an integration is released.',
+              'Discuss integrations, recommendation sources and supported workflows with the community.',
           },
           {
             title: 'Contribute code',
@@ -901,9 +888,9 @@ export const pages: Record<PageId, PageContent> = {
       {
         id: 'release-transparency',
         presentation: 'callout',
-        title: 'Check the release before relying on a capability.',
+        title: 'Follow the project’s changelog.',
         paragraphs: [
-          'Unreleased work is labelled Preview on dev. Check the changelog, tagged releases and versioned docs instead of treating roadmap items, preview connectors or draft automation as stable product behavior.',
+          'The changelog and release list track changes over time. Use the technical documentation for current setup and configuration details.',
         ],
         links: [
           {
@@ -928,7 +915,7 @@ export const pages: Record<PageId, PageContent> = {
       title: 'Need help applying Kubernetes optimization?',
       summary:
         'GreenKube is free and open source. Teams can discuss optional support for assessment, implementation or continuous review without making services a condition of using the project.',
-      note: 'Engagement scope should be grounded in released capabilities, available data and your team’s change controls. No pricing or guaranteed savings are stated here.',
+      note: 'Engagement scope should be grounded in product capabilities, available data and your team’s change controls. No pricing or guaranteed savings are stated here.',
       actions: [
         {
           label: 'Discuss an engagement',
@@ -947,7 +934,7 @@ export const pages: Record<PageId, PageContent> = {
         eyebrow: 'Open source first',
         title: 'Services are optional; the core project stays open.',
         paragraphs: [
-          'The GreenKube project is Apache-2.0 licensed and self-hostable. A services engagement is not required to access the software or its released functionality.',
+          'The GreenKube project is Apache-2.0 licensed and self-hostable. A services engagement is not required to access the software or its available functionality.',
         ],
         links: [
           {
@@ -984,11 +971,10 @@ export const pages: Record<PageId, PageContent> = {
       {
         id: 'release-boundary',
         presentation: 'prose',
-        eyebrow: 'Release boundary',
-        title: 'Support does not change what the software ships.',
+        eyebrow: 'Product capabilities',
+        title: 'Bring evidence and operator review to optimization work.',
         paragraphs: [
-          'GreenKube 0.3.0 provides cost, energy and carbon visibility, dashboards and reporting with estimates, alongside Prometheus/Grafana integration. Any support must describe those outputs as estimates and account for their source coverage and allocation limits.',
-          'Evidence ranking, the GitOps PR bot, apply verification, measured outcomes and real VPA/Karpenter connectors remain Preview on dev. They are not included as stable service deliverables or 0.3.0 capabilities.',
+          'GreenKube provides cost, energy and carbon visibility, dashboards and reporting with estimates, alongside Prometheus/Grafana integration, evidence-backed recommendations, GitOps pull requests and post-change checks. Any support must account for source coverage, allocation limits and the team’s change controls.',
         ],
         links: [{ label: 'Read about methodology and limits', page: 'method' }],
       },

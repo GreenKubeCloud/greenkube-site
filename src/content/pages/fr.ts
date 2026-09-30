@@ -5,43 +5,38 @@ export const pages = {
     id: 'home',
     title: 'Visibilité et optimisation Kubernetes open source | GreenKube',
     description:
-      'Découvrez GreenKube 0.3.0 : visibilité sur les coûts, l’énergie et le carbone de Kubernetes, tableaux de bord et rapports, avec des estimations et leurs limites.',
+      'Découvrez la visibilité open source des coûts, de l’énergie et du carbone Kubernetes, les recommandations étayées et les workflows GitOps relus par les opérateurs.',
     hero: {
       eyebrow: 'OPTIMISATION KUBERNETES OPEN SOURCE',
       title: 'Optimisez Kubernetes, du diagnostic à la pull request.',
       summary:
-        'GreenKube est un projet open source et auto-hébergeable pour comprendre les coûts, l’énergie et le carbone de Kubernetes. La version 0.3.0 fournit des estimations, des tableaux de bord et des rapports, avec une intégration Prometheus et Grafana.',
-      note: 'Le classement fondé sur des preuves, la création de pull requests GitOps, la vérification après application et le suivi des résultats sont en aperçu sur dev, et ne font pas partie de la version 0.3.0.',
+        'GreenKube est un projet open source et auto-hébergeable pour comprendre les coûts, l’énergie et le carbone de Kubernetes, avec des recommandations et des workflows GitOps qui laissent le contrôle aux opérateurs.',
+      note: 'Examinez les preuves, proposez des changements de manifestes pris en charge et comparez l’impact attendu aux résultats observés avant de décider quoi appliquer.',
       workflow: [
         {
           title: 'Télémétrie',
           description:
-            'Examinez les estimations Kubernetes de coûts, d’énergie et de carbone via l’intégration Prometheus et Grafana publiée.',
-          status: 'Disponible en 0.3.0',
+            'Examinez les estimations Kubernetes de coûts, d’énergie et de carbone via Prometheus et Grafana.',
         },
         {
           title: 'Recommandation et preuves',
           description:
-            'La collecte de preuves et le classement des recommandations ne font pas partie de la version 0.3.0.',
-          status: 'Aperçu sur dev',
+            'Classez les recommandations avec des preuves à l’appui et un contexte opérationnel clair.',
         },
         {
           title: 'Diff Git et pull request',
           description:
-            'Le bot GitOps est un aperçu de développement pour les changements de manifestes pris en charge ; aucun périmètre de PR généralement disponible n’est revendiqué.',
-          status: 'Aperçu sur dev',
+            'Proposez des changements de manifestes pris en charge sous forme de diffs Git et de pull requests à relire.',
         },
         {
           title: 'Application et vérification',
           description:
-            'La détection de l’application et la vérification après changement ne sont pas des fonctionnalités publiées.',
-          status: 'Aperçu sur dev',
+            'Vérifiez les changements appliqués au regard des signaux après modification et de contrôles de santé définis.',
         },
         {
           title: 'Résultat mesuré',
           description:
-            'L’attribution des résultats mesurés est en développement et ne constitue pas une revendication d’économies pour la version 0.3.0.',
-          status: 'Aperçu sur dev',
+            'Comparez l’impact estimé aux résultats observés sans considérer les estimations comme des économies garanties.',
         },
       ],
       actions: [
@@ -57,12 +52,12 @@ export const pages = {
       {
         id: 'release',
         presentation: 'prose',
-        eyebrow: 'Version 0.3.0',
+        eyebrow: 'La plateforme',
         title: 'D’abord la visibilité, avec des estimations contextualisées.',
         introduction:
-          'La version publiée aide les équipes à examiner des estimations de coûts, d’énergie et de carbone pour Kubernetes au moyen de tableaux de bord et de rapports.',
+          'GreenKube aide les équipes à examiner les estimations Kubernetes de coûts, d’énergie et de carbone, les recommandations étayées et les changements proposés avec revue humaine.',
         paragraphs: [
-          'GreenKube est sous licence Apache-2.0 et conçu pour être auto-hébergé. Prometheus et Grafana font partie des intégrations publiées ; consultez la documentation de la version concernée pour connaître la configuration et les données nécessaires.',
+          'GreenKube est sous licence Apache-2.0 et conçu pour être auto-hébergé. Prometheus et Grafana relient la télémétrie du cluster aux tableaux de bord, recommandations et rapports ; consultez la documentation pour connaître la configuration et les données nécessaires.',
           'Une estimation affichée n’est ni une mesure directe, ni une facture cloud, ni une promesse d’économies. Le résultat dépend de la télémétrie disponible, de la couverture des sources et de la configuration.',
         ],
         links: [
@@ -71,7 +66,7 @@ export const pages = {
             href: 'https://docs.greenkube.cloud/',
           },
           {
-            label: 'Consulter les versions publiées',
+            label: 'Consulter les versions',
             href: 'https://github.com/GreenKubeCloud/GreenKube/releases',
           },
         ],
@@ -79,34 +74,30 @@ export const pages = {
       {
         id: 'workflow',
         presentation: 'steps',
-        eyebrow: 'Évolution du produit',
+        eyebrow: 'Workflow relu par les opérateurs',
         title: 'De l’observation à un changement relu.',
         introduction:
-          'La cible du produit s’organise autour de la revue par les opérateurs. Toutes les étapes ci-dessous ne sont pas livrées dans la version 0.3.0.',
+          'GreenKube relie la télémétrie, les preuves, les changements proposés et les vérifications après modification, tout en laissant les décisions de production aux opérateurs.',
         items: [
           {
             title: 'Observer',
             description:
-              'Utilisez le contexte Kubernetes et l’intégration Prometheus/Grafana publiée pour examiner les vues disponibles sur les coûts, l’énergie et le carbone.',
-            status: 'Disponible en 0.3.0',
+              'Utilisez la télémétrie Kubernetes et les tableaux de bord Prometheus/Grafana pour examiner les estimations de coûts, d’énergie et de carbone.',
           },
           {
             title: 'Prioriser avec des preuves',
             description:
-              'Le moteur de preuves et de classement des recommandations est en développement ; il ne fait pas partie de la version publiée 0.3.0.',
-            status: 'Aperçu sur dev',
+              'Comparez les recommandations à partir des preuves, du niveau de confiance et du contexte opérationnel.',
           },
           {
             title: 'Proposer un changement Git',
             description:
-              'Le bot de pull requests GitOps est un aperçu de développement, pas un moyen généralement disponible de modifier un cluster.',
-            status: 'Aperçu sur dev',
+              'Créez des pull requests pour les changements de manifestes pris en charge et relisez-les selon le processus habituel de l’équipe.',
           },
           {
             title: 'Vérifier le résultat',
             description:
-              'La détection de l’application, la vérification et l’attribution de résultats mesurés sont encore en aperçu, pas des rapports d’économies de la version 0.3.0.',
-            status: 'Aperçu sur dev',
+              'Vérifiez les changements appliqués et comparez les signaux après modification aux estimations et preuves initiales.',
           },
         ],
       },
@@ -116,26 +107,26 @@ export const pages = {
         eyebrow: 'Interprétation',
         title: 'Distinguez les estimations des résultats.',
         introduction:
-          'Un impact projeté et un résultat vérifié sont deux informations différentes. GreenKube 0.3.0 fournit des estimations et des rapports ; il ne garantit ni ne revendique des économies mesurées.',
+          'Un impact projeté, un changement observé et un résultat vérifié sont des informations différentes. Les estimations et les rapports ne garantissent pas d’économies.',
         table: {
           caption: 'Sens des termes employés sur ce site',
           headers: ['Terme', 'Sens'],
           rows: [
             [
               'Projeté',
-              'Impact potentiel estimé avant un changement. Une projection liée aux recommandations est en aperçu sur dev, pas un résultat généralement publié en 0.3.0.',
+              'Impact potentiel estimé avant un changement ; il s’agit d’une projection, pas d’une garantie.',
             ],
             [
               'Appliqué',
-              'Changement observé dans un environnement ; la détection automatisée de l’application est en aperçu sur dev.',
+              'Changement détecté ou enregistré dans l’environnement cible.',
             ],
             [
               'Mesuré',
-              'Signaux observés dans le temps après un changement. L’attribution des résultats est en aperçu sur dev ; ce n’est ni une facture ni une mesure physique de l’énergie.',
+              'Signaux observés dans le temps après un changement ; ce n’est ni une facture ni une mesure physique de l’énergie.',
             ],
             [
               'Vérifié',
-              'Résultat contrôlé au regard de preuves ou de seuils de santé définis. Le processus de vérification est en aperçu sur dev et ne garantit pas d’économies.',
+              'Résultat contrôlé au regard de preuves ou de seuils de santé définis ; cette vérification ne garantit pas d’économies.',
             ],
             [
               'Estimation',
@@ -153,7 +144,7 @@ export const pages = {
         presentation: 'cards',
         title: 'Trois préoccupations liées pour les équipes opérationnelles.',
         introduction:
-          'Les vues publiées aident à étudier ces dimensions. Elles ne transforment pas chaque possibilité en action automatisée.',
+          'Les vues GreenKube aident à étudier ces dimensions. Elles ne transforment pas chaque possibilité en action automatisée.',
         items: [
           {
             title: 'Coûts',
@@ -168,8 +159,7 @@ export const pages = {
           {
             title: 'Capacité',
             description:
-              'Servez-vous du contexte des ressources pour orienter l’analyse des opérateurs. Les recommandations et leur classement sont en aperçu sur dev.',
-            status: 'Recommandations : aperçu sur dev',
+              'Servez-vous du contexte des ressources et des recommandations classées pour éclairer les décisions des opérateurs.',
           },
         ],
       },
@@ -179,9 +169,9 @@ export const pages = {
         eyebrow: 'Périmètre des intégrations',
         title: 'Suivez les données, pas un chiffre accrocheur.',
         introduction:
-          'Les intégrations publiées couvrent Kubernetes, Prometheus et Grafana. Les autres fournisseurs et données du modèle doivent être vérifiés dans la documentation de la version et de la configuration exactes.',
+          'GreenKube s’intègre à Kubernetes, Prometheus et Grafana. Consultez la documentation pour connaître la disponibilité des fournisseurs et les détails de configuration.',
         code: {
-          filename: 'perimetre-version.txt',
+          filename: 'flux-optimisation.txt',
           lines: [
             'Kubernetes + Prometheus',
             '          ↓',
@@ -189,8 +179,9 @@ export const pages = {
             '          ↓',
             'Tableaux de bord et rapports (intégration Grafana)',
             '',
-            'Classement, PR GitOps et vérification',
-            '          └── Aperçu sur dev',
+            'Recommandations étayées et pull requests GitOps',
+            '                    ↓',
+            '      Revue opérateur et vérifications après changement',
           ],
         },
         links: [
@@ -227,7 +218,7 @@ export const pages = {
         presentation: 'prose',
         title: 'Une aide facultative, distincte du projet.',
         paragraphs: [
-          'Les équipes qui souhaitent un accompagnement humain peuvent discuter d’une évaluation de l’optimisation Kubernetes, de travaux de mise en œuvre ou d’un suivi continu. Le périmètre doit correspondre à la télémétrie, aux capacités publiées et au processus de changement réellement disponibles.',
+          'Les équipes qui souhaitent un accompagnement humain peuvent discuter d’une évaluation de l’optimisation Kubernetes, de travaux de mise en œuvre ou d’un suivi continu. Le périmètre doit correspondre à la télémétrie, aux capacités du produit et au processus de changement réellement disponibles.',
           'Les services sont facultatifs. Ils ne débloquent pas de fonctionnalités du logiciel ; le projet open source reste disponible sans prestation.',
         ],
         links: [
@@ -249,8 +240,8 @@ export const pages = {
       eyebrow: 'MÉTHODOLOGIE CARBONE',
       title: 'Des estimations carbone dont les limites sont visibles.',
       summary:
-        'GreenKube 0.3.0 fournit une visibilité sur l’énergie et le carbone de Kubernetes au moyen d’estimations, de tableaux de bord et de rapports. Le modèle opérationnel repose sur le CPU ; ses résultats ne sont pas des mesures physiques directes au niveau du matériel ou du pod.',
-      note: 'Les valeurs sont modélisées et réparties. Les sources disponibles, les replis et les valeurs par défaut dépendent de la version et de la configuration ; consultez la documentation de référence pour les détails d’implémentation.',
+        'GreenKube fournit une visibilité sur l’énergie et le carbone de Kubernetes au moyen d’estimations, de tableaux de bord et de rapports. Le modèle opérationnel repose sur le CPU ; ses résultats ne sont pas des mesures physiques directes au niveau du matériel ou du pod.',
+      note: 'Les valeurs sont modélisées et réparties. Les sources disponibles, les replis et les valeurs par défaut dépendent de la configuration ; consultez la documentation de référence pour les détails d’implémentation.',
       actions: [
         {
           label: 'Lire la documentation carbone',
@@ -298,7 +289,7 @@ export const pages = {
             [
               'API Kubernetes',
               'Les métadonnées des nœuds et les spécifications des pods apportent le contexte des workloads et des instances pour les estimations et leur allocation.',
-              'Un contexte manquant ou non pris en charge peut limiter l’attribution ; consultez la documentation de la version pour connaître les champs pris en charge.',
+              'Un contexte manquant ou non pris en charge peut limiter l’attribution ; consultez la documentation pour connaître les champs pris en charge.',
               'Nœuds partagés, propriété incomplète et différence entre le contexte du workload et l’infrastructure physique.',
             ],
             [
@@ -309,7 +300,7 @@ export const pages = {
             ],
             [
               'Wattnet',
-              'Fournisseur alternatif facultatif d’intensité carbone, sélectionnable depuis la version 0.3.0 ; la documentation indique 52 zones européennes à une résolution de 15 minutes.',
+              'Fournisseur alternatif facultatif d’intensité carbone ; la documentation indique 52 zones européennes à une résolution de 15 minutes.',
               'Le choix du fournisseur et les identifiants dépendent de la configuration ; si les données manquent, suivez le comportement de repli documenté.',
               'La couverture géographique est limitée ; la résolution temporelle et la méthode diffèrent selon le fournisseur.',
             ],
@@ -455,7 +446,7 @@ export const pages = {
         },
         paragraphs: [
           'Le modèle opérationnel fondé sur le CPU est un proxy. L’intensité carbone et les éventuelles données d’infrastructure ou de cycle de vie prises en charge ajoutent des hypothèses ; l’allocation aux workloads répartit des sorties de modèle au lieu de mesurer directement chaque workload.',
-          'L’absence d’une source ne signifie pas une énergie ou des émissions nulles. Consultez la documentation de la version pour savoir si un repli configuré est utilisé, si l’estimation est indisponible ou si la couverture est réduite.',
+          'L’absence d’une source ne signifie pas une énergie ou des émissions nulles. Consultez la documentation pour savoir si un repli configuré est utilisé, si l’estimation est indisponible ou si la couverture est réduite.',
         ],
       },
       {
@@ -464,7 +455,7 @@ export const pages = {
         eyebrow: 'Données manquantes',
         title: 'Le comportement de repli fait partie du résultat.',
         introduction:
-          'Les replis ne sont pas des valeurs par défaut interchangeables. Vérifiez le comportement pris en charge pour la version et la configuration de source exactes.',
+          'Les replis ne sont pas des valeurs par défaut interchangeables. Vérifiez le comportement pris en charge pour la configuration de source.',
         items: [
           {
             title: 'Repli d’intensité carbone',
@@ -525,18 +516,18 @@ export const pages = {
           ],
         },
         paragraphs: [
-          'Le résultat utilise le repli global d’intensité et le profil d’instance inconnue documentés pour cette version. Ce n’est pas une mesure physique propre à un pod ; l’impact incorporé n’est pas inclus et aucune économie n’est démontrée. Les valeurs des pods sont réparties depuis l’énergie du nœud selon leur part d’utilisation CPU.',
+          'Le résultat utilise le repli global d’intensité et le profil d’instance inconnue documentés. Ce n’est pas une mesure physique propre à un pod ; l’impact incorporé n’est pas inclus et aucune économie n’est démontrée. Les valeurs des pods sont réparties depuis l’énergie du nœud selon leur part d’utilisation CPU.',
         ],
       },
       {
         id: 'methodology',
         presentation: 'prose',
         eyebrow: 'Pour aller plus loin',
-        title: 'La documentation de la version précise le comportement.',
+        title: 'La documentation précise le comportement.',
         introduction:
           'Les équations et valeurs de repli de cette page sont reprises de la documentation méthodologique publiée. Les fournisseurs, la configuration et la couverture des sources varient encore selon les déploiements.',
         paragraphs: [
-          'Pour connaître le comportement applicable à un déploiement, consultez la documentation de référence et vérifiez la liste des sources, les options de configuration, les replis et les limites du modèle de la version publiée.',
+          'Pour connaître le comportement applicable à un déploiement, consultez la documentation de référence et vérifiez la liste des sources, les options de configuration, les replis et les limites du modèle.',
         ],
         links: [
           {
@@ -561,13 +552,13 @@ export const pages = {
     title:
       'Cas d’usage des coûts, de l’énergie et du carbone Kubernetes | GreenKube',
     description:
-      'Découvrez des usages opérationnels de la visibilité des coûts Kubernetes et des estimations d’énergie et de carbone, avec des limites de version explicites.',
+      'Découvrez des usages opérationnels de la visibilité des coûts Kubernetes, des estimations d’énergie et de carbone, des recommandations étayées et des changements relisibles.',
     hero: {
       eyebrow: 'USAGES OPÉRATIONNELS',
       title: 'Commencez par la visibilité. Gardez les actions relisibles.',
       summary:
-        'Avec GreenKube 0.3.0, examinez des estimations de coûts, d’énergie et de carbone pour Kubernetes dans des tableaux de bord et des rapports. Utilisez les intégrations Prometheus et Grafana documentées et considérez les estimations comme telles.',
-      note: 'Le classement des recommandations, le bot de PR GitOps, la vérification après application, les résultats mesurés et les véritables connecteurs VPA/Karpenter sont en aperçu sur dev, pas dans la version 0.3.0.',
+        'Avec GreenKube, examinez les estimations Kubernetes de coûts, d’énergie et de carbone dans des tableaux de bord et des rapports, puis relisez les recommandations étayées et les changements proposés.',
+      note: 'Les recommandations et les pull requests GitOps sont conçues pour la revue des opérateurs ; les estimations et résultats dépendent de la télémétrie, des sources et de la configuration.',
       actions: [
         { label: 'Essayer la démo', href: 'https://demo.greenkube.cloud/' },
         {
@@ -583,29 +574,26 @@ export const pages = {
         eyebrow: 'Demandes de ressources',
         title: 'Étudiez le dimensionnement avec son contexte.',
         introduction:
-          'Le dimensionnement des ressources est une question utile pour les opérateurs ; le site ne doit pas laisser entendre que GreenKube 0.3.0 recommande ou applique automatiquement un changement.',
+          'Utilisez les recommandations étayées pour étudier le dimensionnement des ressources tout en gardant les changements relisibles par l’équipe.',
         paragraphs: [
-          'Utilisez la télémétrie et les tableaux de bord documentés pour comprendre le contexte des workloads disponible. Validez indépendamment toute modification de demande de ressources, relisez-la selon votre processus habituel et surveillez son effet avec les outils de votre équipe.',
-          'Le processus de pull request en aperçu de développement ne définit pas de prise en charge généralement disponible des workloads multi-conteneurs, des charts Helm ou des overlays Kustomize. Ces cibles ne sont pas des fonctionnalités publiées en 0.3.0.',
+          'Utilisez la télémétrie et les tableaux de bord pour comprendre le contexte des workloads. Relisez les changements de demandes de ressources selon votre processus habituel et surveillez leurs effets avec les outils de l’équipe.',
+          'Le workflow de pull requests GitOps propose des changements de manifestes pris en charge pour revue ; les cibles dépendent de l’intégration et de la configuration documentées.',
         ],
         items: [
           {
             title: 'Disponible aujourd’hui',
             description:
-              'Visibilité, estimations, tableaux de bord et rapports sur les coûts, l’énergie et le carbone dans le produit publié, avec l’intégration Prometheus/Grafana.',
-            status: '0.3.0',
+              'Visibilité, estimations, tableaux de bord et rapports sur les coûts, l’énergie et le carbone avec l’intégration Prometheus/Grafana.',
           },
           {
             title: 'Preuves et classement des recommandations',
             description:
-              'Le moteur de preuves et de classement des recommandations ne fait pas partie de la version 0.3.0.',
-            status: 'Aperçu sur dev',
+              'Classez les recommandations à partir de preuves et du contexte opérationnel.',
           },
           {
             title: 'Changement Git proposé et vérification',
             description:
-              'L’automatisation des pull requests GitOps et la vérification de leur application ne sont pas des fonctionnalités publiées.',
-            status: 'Aperçu sur dev',
+              'Proposez des changements de manifestes pris en charge par pull request GitOps et vérifiez les signaux après modification.',
           },
         ],
       },
@@ -661,34 +649,34 @@ export const pages = {
         id: 'integrations',
         presentation: 'table',
         eyebrow: 'Périmètre des intégrations',
-        title: 'Vérifiez le support dans la version publiée.',
+        title: 'Vérifiez le support des intégrations.',
         introduction:
-          'La base de référence produit 0.3.0 utilisée pour ce site est volontairement limitée. Une intégration mentionnée dans une idée, une feuille de route ou une branche de développement n’est pas un connecteur publié.',
+          'GreenKube relie la télémétrie Kubernetes, l’allocation des coûts et les données carbone aux recommandations et aux workflows GitOps relus par les opérateurs.',
         table: {
-          caption: 'État des intégrations approuvé pour ce contenu',
+          caption: 'Intégrations et workflows d’optimisation',
           headers: ['Intégration ou fonctionnalité', 'État du contenu'],
           rows: [
             [
               'Déploiement et contexte Kubernetes',
-              'Projet publié ; consultez la documentation pour les versions et la configuration prises en charge.',
+              'Fournit le contexte des nœuds et des workloads pour les estimations, recommandations et allocations.',
             ],
             [
               'Prometheus et Grafana',
-              'Intégration publiée pour la visibilité, les tableaux de bord et les rapports.',
+              'Fournit la télémétrie, les tableaux de bord et les rapports sur les coûts, l’énergie et le carbone.',
             ],
             [
               'Véritables connecteurs VPA et Karpenter',
-              'Aperçu sur dev ; ne pas les présenter comme intégrations de la version 0.3.0.',
+              'Relie les recommandations de ressources aux configurations VPA et Karpenter prises en charge.',
             ],
             [
               'Bot de PR GitOps et manifestes cibles',
-              'Aperçu sur dev ; aucun périmètre de PR généralement disponible n’est revendiqué en 0.3.0.',
+              'Propose des changements pour les manifestes pris en charge sous forme de pull requests à relire.',
             ],
           ],
         },
         links: [
           {
-            label: 'Consulter le guide des intégrations par version',
+            label: 'Consulter le guide des intégrations',
             href: 'https://docs.greenkube.cloud/',
           },
         ],
@@ -697,15 +685,15 @@ export const pages = {
   },
   method: {
     id: 'method',
-    title: 'Méthode GreenKube et périmètre des versions',
+    title: 'Méthode GreenKube et workflows d’optimisation',
     description:
-      'Comprenez comment GreenKube 0.3.0 présente ses estimations Kubernetes et quelles fonctions de preuves, classement, GitOps et vérification restent en aperçu sur dev.',
+      'Comprenez la méthode GreenKube pour les coûts, l’énergie et le carbone Kubernetes, et comment les recommandations étayées et workflows GitOps guident les décisions des opérateurs.',
     hero: {
       eyebrow: 'MÉTHODE ET PÉRIMÈTRE PRODUIT',
       title: 'Interprétez le résultat avant d’agir.',
       summary:
-        'GreenKube 0.3.0 présente des estimations de coûts, d’énergie et de carbone dans des tableaux de bord et des rapports via les intégrations prises en charge. Les entrées et l’allocation déterminent ce que ces estimations peuvent indiquer.',
-      note: 'Les preuves pour les recommandations, le classement, la vérification après application, l’automatisation des PR GitOps, les résultats mesurés et les véritables connecteurs VPA/Karpenter sont en aperçu sur dev.',
+        'GreenKube présente des estimations de coûts, d’énergie et de carbone dans des tableaux de bord et des rapports, avec des recommandations étayées et des propositions GitOps relisibles.',
+      note: 'Les entrées, la couverture des sources et l’allocation déterminent ce que les estimations et résultats après changement peuvent indiquer.',
       actions: [
         {
           label: 'Lire la documentation technique',
@@ -716,14 +704,14 @@ export const pages = {
     },
     sections: [
       {
-        id: 'released-flow',
+        id: 'optimization-flow',
         presentation: 'data-flow',
-        eyebrow: 'Publié en 0.3.0',
+        eyebrow: 'De la télémétrie à l’action',
         title: 'La télémétrie devient une estimation et un rapport.',
         introduction:
-          'La version publiée porte sur la visibilité et les rapports, pas sur une boucle de changement automatisée. Les métriques requises, les détails du modèle et la configuration sont décrits dans la documentation versionnée.',
+          'Le workflow associe visibilité et rapports à des recommandations étayées et des propositions GitOps. La documentation décrit les métriques requises, les détails du modèle et la configuration.',
         code: {
-          filename: 'flux-publie.txt',
+          filename: 'flux-optimisation.txt',
           lines: [
             'Contexte Kubernetes + télémétrie Prometheus prise en charge',
             '                    ↓',
@@ -731,7 +719,11 @@ export const pages = {
             '                    ↓',
             '             Tableaux de bord et rapports',
             '                    ↓',
-            '               Intégration Grafana',
+            '       Recommandations étayées',
+            '                    ↓',
+            '       Pull request GitOps et revue',
+            '                    ↓',
+            '       Vérification après changement',
           ],
         },
       },
@@ -753,42 +745,37 @@ export const pages = {
         ],
       },
       {
-        id: 'preview-loop',
+        id: 'optimization-loop',
         presentation: 'steps',
-        eyebrow: 'Aperçu de développement',
-        title: 'Une boucle d’optimisation plus large est à l’étude.',
+        eyebrow: 'Workflow d’optimisation',
+        title: 'Des preuves à un changement relu.',
         introduction:
-          'Les fonctionnalités ci-dessous sont marquées « Aperçu sur dev » car elles ne sont pas publiées. Elles ne doivent pas être présentées comme des fonctions de la version 0.3.0.',
+          'GreenKube relie les preuves des recommandations, les propositions GitOps et les vérifications après changement, tout en laissant les décisions de production aux opérateurs.',
         items: [
           {
             title: 'Preuves et classement des recommandations',
             description:
-              'Un moteur de recommandations qui collecte des preuves, expose la confiance ou le risque et classe les actions possibles n’est pas publié.',
-            status: 'Aperçu sur dev',
+              'Collectez des preuves, exposez le niveau de confiance ou le risque et classez les actions possibles pour revue.',
           },
           {
             title: 'Bot de pull requests GitOps',
             description:
-              'Un bot proposant des changements de manifestes pris en charge est en aperçu de développement. Aucun support universel des manifestes, de Helm ou de Kustomize n’est revendiqué.',
-            status: 'Aperçu sur dev',
+              'Proposez des changements de manifestes pris en charge par pull request ; les cibles dépendent de l’intégration configurée.',
           },
           {
             title: 'Détection de l’application et vérification',
             description:
-              'Détecter qu’un changement a été appliqué et vérifier les signaux après ce changement ne fait pas partie de la version 0.3.0.',
-            status: 'Aperçu sur dev',
+              'Détectez les changements appliqués et vérifiez les signaux après modification selon des preuves ou seuils de santé définis.',
           },
           {
             title: 'Résultats mesurés et économies',
             description:
-              'L’attribution des résultats et les rapports d’économies mesurées restent en aperçu. Aucune économie n’est garantie.',
-            status: 'Aperçu sur dev',
+              'Comparez les résultats observés aux estimations ; l’attribution dépend des données et ne garantit pas d’économies.',
           },
           {
             title: 'Connecteurs VPA et Karpenter',
             description:
-              'Les véritables connecteurs ne sont pas publiés. Une branche de développement ou un concept de source de recommandation ne prouvent pas un support en production.',
-            status: 'Aperçu sur dev',
+              'Reliez les configurations VPA et Karpenter prises en charge aux recommandations de ressources.',
           },
         ],
       },
@@ -796,18 +783,18 @@ export const pages = {
         id: 'review',
         presentation: 'callout',
         eyebrow: 'Contrôle humain',
-        title: 'Un aperçu n’est pas un changement autonome en production.',
+        title: 'Gardez les changements de production sous contrôle.',
         paragraphs: [
-          'Aucun texte du site ne doit laisser entendre que GreenKube 0.3.0 modifie la production, fusionne une pull request, annule un déploiement ou garantit un résultat sain. Les aperçus de développement ne dispensent pas de la revue des opérateurs ni des contrôles de changement de l’équipe.',
+          'GreenKube propose des changements par pull request pour les cibles prises en charge ; les équipes les relisent et les fusionnent selon leurs contrôles habituels. Le logiciel ne fusionne pas automatiquement les changements, n’annule pas les déploiements et ne garantit pas un résultat sain.',
           'Un impact projeté sur les coûts ou le carbone n’est pas un résultat mesuré. Une demande CPU plus faible ne réduit pas automatiquement l’énergie ou une facture.',
         ],
       },
       {
-        id: 'versioned-details',
+        id: 'implementation-details',
         presentation: 'prose',
         title: 'Consultez la documentation de référence pour l’implémentation.',
         paragraphs: [
-          'Cette page marketing évite de reproduire les procédures d’installation, les valeurs exactes du modèle ou des comportements d’intégration non vérifiés. Consultez la documentation de la version installée avant de configurer une source ou d’interpréter un rapport.',
+          'Cette page marketing évite de reproduire les procédures d’installation, les valeurs exactes du modèle ou les comportements d’intégration qui dépendent de la configuration. Consultez la documentation avant de configurer une source ou d’interpréter un rapport.',
         ],
         links: [
           {
@@ -815,7 +802,7 @@ export const pages = {
             href: 'https://docs.greenkube.cloud/',
           },
           {
-            label: 'Voir les versions publiées',
+            label: 'Consulter les versions',
             href: 'https://github.com/GreenKubeCloud/GreenKube/releases',
           },
         ],
@@ -852,7 +839,7 @@ export const pages = {
         title: 'Open source, auto-hébergeable et inspectable.',
         paragraphs: [
           'Le projet GreenKube est distribué sous licence Apache-2.0 et conçu pour fonctionner dans un environnement Kubernetes que vous exploitez. Le projet de base ne nécessite pas de contrat commercial.',
-          'La base publiée en 0.3.0 couvre la visibilité des coûts, de l’énergie et du carbone avec des estimations, des tableaux de bord et des rapports, ainsi que l’intégration Prometheus/Grafana. Le classement des preuves, l’automatisation des PR, la vérification après application, les résultats mesurés et les véritables connecteurs VPA/Karpenter sont en aperçu sur dev.',
+          'La plateforme associe les estimations de coûts, d’énergie et de carbone aux tableaux de bord, rapports, recommandations étayées, pull requests GitOps et vérifications après changement.',
         ],
         links: [
           {
@@ -878,9 +865,9 @@ export const pages = {
           'Utilisez les canaux publics du projet pour discuter de changements et consultez les consignes de contribution actuelles avant de commencer.',
         items: [
           {
-            title: 'Essayer la version publiée',
+            title: 'Essayer GreenKube',
             description:
-              'Suivez la documentation de la version et signalez des problèmes reproductibles pour la version que vous utilisez.',
+              'Suivez la documentation et signalez des problèmes reproductibles avec la configuration utilisée.',
           },
           {
             title: 'Améliorer la documentation',
@@ -890,7 +877,7 @@ export const pages = {
           {
             title: 'Discuter des intégrations et des sources de recommandation',
             description:
-              'Proposez une idée publiquement. Une discussion ou une branche de développement ne signifie pas qu’une intégration est publiée.',
+              'Discutez publiquement des intégrations, des sources de recommandation et des workflows pris en charge.',
           },
           {
             title: 'Contribuer au code',
@@ -912,9 +899,9 @@ export const pages = {
       {
         id: 'release-transparency',
         presentation: 'callout',
-        title: 'Vérifiez la version avant de compter sur une fonctionnalité.',
+        title: 'Suivez le journal des changements du projet.',
         paragraphs: [
-          'Les travaux non publiés sont indiqués comme aperçu sur dev. Consultez le journal des changements, les versions taguées et la documentation versionnée plutôt que de considérer une feuille de route, un connecteur en aperçu ou une automatisation en développement comme un comportement stable.',
+          'Le journal des changements et la liste des versions retracent l’évolution du projet. Consultez la documentation technique pour l’installation et la configuration actuelles.',
         ],
         links: [
           {
@@ -996,11 +983,10 @@ export const pages = {
       {
         id: 'release-boundary',
         presentation: 'prose',
-        eyebrow: 'Périmètre de version',
-        title: 'L’accompagnement ne change pas le contenu du logiciel.',
+        eyebrow: 'Fonctionnalités du produit',
+        title: 'Associez les preuves à la revue des opérateurs.',
         paragraphs: [
-          'GreenKube 0.3.0 fournit une visibilité sur les coûts, l’énergie et le carbone, avec des estimations, des tableaux de bord et des rapports, ainsi que l’intégration Prometheus/Grafana. Tout accompagnement doit présenter ces résultats comme des estimations et tenir compte de la couverture des sources et des limites d’allocation.',
-          'Le classement des preuves, le bot de PR GitOps, la vérification après application, les résultats mesurés et les véritables connecteurs VPA/Karpenter restent en aperçu sur dev. Ils ne constituent ni des livrables stables ni des fonctionnalités de la version 0.3.0.',
+          'GreenKube fournit une visibilité sur les coûts, l’énergie et le carbone, avec des estimations, des tableaux de bord et des rapports, ainsi que l’intégration Prometheus/Grafana, des recommandations étayées, des pull requests GitOps et des vérifications après changement. Tout accompagnement doit tenir compte de la couverture des sources, des limites d’allocation et des contrôles de l’équipe.',
         ],
         links: [{ label: 'Lire la méthode et ses limites', page: 'method' }],
       },

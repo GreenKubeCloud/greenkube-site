@@ -76,6 +76,8 @@ const pageRoutes = locales.flatMap((locale) =>
 );
 const htmlByRoute = new Map();
 const sectionIdsByRoute = new Map();
+const releaseStatusPattern =
+  /\b0\.3\.\d+\b|preview on dev|aperçu sur dev|dev-only/i;
 
 for (const route of pageRoutes) {
   const html = await readDistFile(routeFile(route));
@@ -213,6 +215,13 @@ for (const route of pageRoutes) {
   }
 }
 
+for (const [route, html] of htmlByRoute) {
+  report(
+    !releaseStatusPattern.test(html),
+    `${route} contains version-specific availability labels`,
+  );
+}
+
 for (const slug of pageSlugs) {
   const englishRoute = `/en/${slug}`;
   const frenchRoute = `/fr/${slug}`;
@@ -317,8 +326,8 @@ if (llms) {
     report(llms.includes(required), `llms.txt is missing ${required}`);
   }
   report(
-    llms.toLowerCase().includes('preview on `dev`'),
-    'llms.txt must disclose the unreleased GitOps workflow',
+    !releaseStatusPattern.test(llms),
+    'llms.txt must not contain version-specific availability labels',
   );
 }
 
@@ -412,21 +421,11 @@ for (const [locale, html] of [
         '500',
         'PUE',
       ].every((term) => html.includes(term)),
-    `${locale} carbon page is missing released source or fallback detail`,
+    `${locale} carbon page is missing source or fallback detail`,
   );
   report(
     Boolean(html) && (html.includes('3.575') || html.includes('3,575')),
     `${locale} carbon page is missing the documented-input calculation example`,
-  );
-}
-
-for (const [route, expected] of [
-  ['/en/', 'Preview on dev'],
-  ['/fr/', 'Aperçu sur dev'],
-]) {
-  report(
-    htmlByRoute.get(route)?.includes(expected),
-    `${route} must disclose the development-preview release boundary`,
   );
 }
 

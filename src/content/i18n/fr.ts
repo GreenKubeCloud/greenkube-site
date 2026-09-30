@@ -32,7 +32,6 @@ export const fr = {
   footerProject: 'Projet',
   footerResources: 'Ressources',
   externalLinkLabel: 's’ouvre dans un nouvel onglet',
-  previewBadge: 'Aperçu sur dev',
   openSourceLabel: 'Open source · Apache-2.0',
   copyright: 'GreenKube est un logiciel open source sous licence Apache-2.0.',
   trustItems: [

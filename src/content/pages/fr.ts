@@ -45,7 +45,10 @@ export const pages = {
           label: 'Voir le projet sur GitHub',
           href: 'https://github.com/GreenKubeCloud/GreenKube',
         },
-        { label: 'Installer avec Helm', href: 'https://docs.greenkube.cloud/' },
+        {
+          label: 'Installer avec Helm',
+          href: 'https://docs.greenkube.cloud/getting-started/quickstart/',
+        },
       ],
     },
     sections: [
@@ -63,7 +66,7 @@ export const pages = {
         links: [
           {
             label: 'Lire la documentation',
-            href: 'https://docs.greenkube.cloud/',
+            href: 'https://docs.greenkube.cloud/getting-started/introduction/',
           },
           {
             label: 'Consulter les versions',
@@ -100,44 +103,6 @@ export const pages = {
               'Vérifiez les changements appliqués et comparez les signaux après modification aux estimations et preuves initiales.',
           },
         ],
-      },
-      {
-        id: 'outcomes',
-        presentation: 'table',
-        eyebrow: 'Interprétation',
-        title: 'Distinguez les estimations des résultats.',
-        introduction:
-          'Un impact projeté, un changement observé et un résultat vérifié sont des informations différentes. Les estimations et les rapports ne garantissent pas d’économies.',
-        table: {
-          caption: 'Sens des termes employés sur ce site',
-          headers: ['Terme', 'Sens'],
-          rows: [
-            [
-              'Projeté',
-              'Impact potentiel estimé avant un changement ; il s’agit d’une projection, pas d’une garantie.',
-            ],
-            [
-              'Appliqué',
-              'Changement détecté ou enregistré dans l’environnement cible.',
-            ],
-            [
-              'Mesuré',
-              'Signaux observés dans le temps après un changement ; ce n’est ni une facture ni une mesure physique de l’énergie.',
-            ],
-            [
-              'Vérifié',
-              'Résultat contrôlé au regard de preuves ou de seuils de santé définis ; cette vérification ne garantit pas d’économies.',
-            ],
-            [
-              'Estimation',
-              'Valeur modélisée ou répartie à partir de la télémétrie et des paramètres disponibles ; ce n’est pas une mesure physique directe.',
-            ],
-            [
-              'Économies',
-              'Non garanties. Une demande de ressources ou une estimation plus basse ne prouve pas une baisse de facture ou d’énergie.',
-            ],
-          ],
-        },
       },
       {
         id: 'dimensions',
@@ -209,7 +174,7 @@ export const pages = {
           },
           {
             label: 'Lire la documentation',
-            href: 'https://docs.greenkube.cloud/',
+            href: 'https://docs.greenkube.cloud/getting-started/introduction/',
           },
         ],
       },
@@ -235,92 +200,90 @@ export const pages = {
     id: 'carbon',
     title: 'Estimations carbone et énergie pour Kubernetes | GreenKube',
     description:
-      'Comprenez les estimations d’énergie et de carbone de GreenKube pour Kubernetes : limites du proxy CPU, couverture des sources, replis, incertitude et allocation.',
+      'Découvrez comment GreenKube combine la télémétrie Kubernetes, les profils d’instances, l’intensité carbone et l’allocation aux workloads pour estimer l’énergie et le carbone.',
     hero: {
-      eyebrow: 'MÉTHODOLOGIE CARBONE',
-      title: 'Des estimations carbone dont les limites sont visibles.',
+      eyebrow: 'MÉTHODOLOGIE ÉNERGIE ET CARBONE',
+      title: 'Comment GreenKube estime l’énergie et le carbone de Kubernetes.',
       summary:
-        'GreenKube fournit une visibilité sur l’énergie et le carbone de Kubernetes au moyen d’estimations, de tableaux de bord et de rapports. Le modèle opérationnel repose sur le CPU ; ses résultats ne sont pas des mesures physiques directes au niveau du matériel ou du pod.',
-      note: 'Les valeurs sont modélisées et réparties. Les sources disponibles, les replis et les valeurs par défaut dépendent de la configuration ; consultez la documentation de référence pour les détails d’implémentation.',
+        'GreenKube combine la télémétrie CPU et le contexte Kubernetes avec les profils de puissance des instances, l’intensité carbone du réseau et le PUE du centre de données. Il estime l’énergie des nœuds et le CO₂e opérationnel, répartit les résultats entre les workloads et peut inclure une estimation distincte de l’impact incorporé.',
       actions: [
         {
-          label: 'Lire la documentation carbone',
-          href: 'https://docs.greenkube.cloud/',
+          label: 'Lire le guide de suivi carbone',
+          href: 'https://docs.greenkube.cloud/features/carbon-tracking/',
         },
-        { label: 'Voir la méthode générale', page: 'method' },
+        { label: 'Explorer la méthode générale', page: 'method' },
       ],
     },
     sections: [
       {
         id: 'what-is-estimated',
         presentation: 'prose',
-        eyebrow: 'Périmètre',
-        title: 'Une estimation n’est pas une mesure physique.',
+        eyebrow: 'Aperçu de la méthode',
+        title: 'Des données d’entrée aux estimations par workload.',
         introduction:
-          'Distinguez l’estimation de l’énergie opérationnelle, l’attribution de l’intensité carbone, l’allocation aux workloads, l’allocation des coûts et les éventuels impacts de cycle de vie représentés par les données prises en charge.',
+          'La méthode suit trois étapes : estimer l’énergie du nœud à partir de l’utilisation CPU et d’un profil de puissance d’instance ; appliquer l’intensité carbone et le PUE pour calculer le CO₂e opérationnel ; puis répartir les résultats entre les workloads. Les données Boavizta facultatives apportent une composante distincte d’impact incorporé.',
         paragraphs: [
-          'Le modèle opérationnel actuel repose sur le CPU. La télémétrie CPU est un proxy utilisé par un modèle ; elle n’équivaut pas à une lecture électrique du serveur, du nœud, du conteneur ou du pod. GreenKube ne revendique pas une comptabilité physique complète de l’énergie pour chaque classe de ressources.',
-          'Le CO₂e attribué à un workload est une estimation répartie, et non une mesure directe de l’électricité consommée par un pod donné. L’infrastructure partagée et une attribution incomplète peuvent influer sur la répartition d’un total.',
-          'Les estimations de coûts forment une vue d’allocation distincte. Ni un coût réparti ni une estimation carbone ne constitue une facture, une attestation ou la preuve qu’un changement proposé a réduit la consommation.',
+          'Prometheus fournit l’utilisation CPU ; les métadonnées Kubernetes des nœuds et des pods apportent le contexte nécessaire aux profils d’instances et à l’allocation des workloads.',
+          'Les impacts opérationnels et incorporés sont calculés séparément. OpenCost fournit une vue distincte de répartition des coûts, présentée avec les estimations d’énergie et de carbone.',
         ],
       },
       {
         id: 'inputs',
         presentation: 'table',
-        eyebrow: 'Sources et données',
-        title: 'Ce qu’une donnée peut—et ne peut pas—indiquer.',
+        eyebrow: 'Sources de données',
+        title: 'Les entrées qui composent l’estimation.',
         introduction:
-          'La documentation méthodologique publiée nomme les sources ci-dessous. La disponibilité effective d’une API dépend encore de sa configuration, de ses identifiants et de sa couverture. La colonne de disponibilité distingue les entrées intégrées des sources sélectionnables ou facultatives.',
+          'La télémétrie CPU de Prometheus et les métadonnées Kubernetes forment la base du modèle opérationnel. Les fournisseurs d’intensité carbone, les profils d’instances et le PUE apportent le contexte géographique et celui des centres de données. Boavizta peut fournir des données de cycle de vie, tandis qu’OpenCost sert à la répartition distincte des coûts. Le tableau résume les rôles, disponibilités et replis documentés.',
         table: {
-          caption: 'Sources documentées, rôles, replis et incertitudes',
+          caption: 'Sources, rôles et replis documentés',
           headers: [
             'Source',
-            'Rôle et disponibilité',
-            'Repli ou comportement si les données manquent',
-            'Incertitude à prendre en compte',
+            'Rôle dans la méthode',
+            'Disponibilité et repli',
+            'Couverture et hypothèses',
           ],
           rows: [
             [
               'Prometheus',
-              'Entrée publiée de télémétrie CPU pour le modèle d’énergie opérationnelle ; d’autres métriques peuvent être collectées sans entrer dans ce modèle.',
+              'L’utilisation CPU est la donnée d’activité du modèle d’énergie opérationnelle. D’autres métriques peuvent être collectées sans entrer dans ce calcul.',
               'La couverture dépend des données collectées et de la période choisie. Les valeurs par défaut du modèle sont signalées comme estimées avec leurs motifs.',
-              'Lacunes d’échantillonnage et approximation CPU-vers-puissance. La mémoire, le réseau, le disque et le GPU ne sont pas inclus dans ce modèle.',
+              'Les lacunes d’échantillonnage affectent la couverture ; l’utilisation CPU sert à estimer la puissance à partir d’un profil d’instance.',
             ],
             [
               'API Kubernetes',
               'Les métadonnées des nœuds et les spécifications des pods apportent le contexte des workloads et des instances pour les estimations et leur allocation.',
               'Un contexte manquant ou non pris en charge peut limiter l’attribution ; consultez la documentation pour connaître les champs pris en charge.',
-              'Nœuds partagés, propriété incomplète et différence entre le contexte du workload et l’infrastructure physique.',
+              'Les nœuds partagés et la propriété incomplète affectent la répartition des résultats du nœud.',
             ],
             [
               'Electricity Maps',
               'Fournisseur par défaut de l’intensité carbone, avec des facteurs dépendant du lieu et du temps.',
               'Si les données du fournisseur sont indisponibles, GreenKube utilise les valeurs intégrées par zone ; en l’absence de valeur de zone, le repli global documenté est de 500 gCO₂e/kWh.',
-              'Correspondance de zone, disponibilité de l’API, fraîcheur des données et écart entre une moyenne régionale et l’électricité réellement consommée.',
+              'Le résultat dépend de la correspondance de zone et de la fraîcheur des données ; un facteur régional peut différer de l’électricité utilisée dans un centre de données donné.',
             ],
             [
               'Wattnet',
               'Fournisseur alternatif facultatif d’intensité carbone ; la documentation indique 52 zones européennes à une résolution de 15 minutes.',
               'Le choix du fournisseur et les identifiants dépendent de la configuration ; si les données manquent, suivez le comportement de repli documenté.',
-              'La couverture géographique est limitée ; la résolution temporelle et la méthode diffèrent selon le fournisseur.',
+              'Sa couverture géographique, sa résolution temporelle et sa méthode documentées diffèrent de celles des autres fournisseurs.',
             ],
             [
               'Profils CCF intégrés et PUE',
               'Les profils de puissance statiques des instances alimentent le modèle CPU ; les profils PUE par fournisseur représentent les frais généraux du site.',
               'Pour une instance inconnue, les replis documentés sont un PUE de 1,3, 1 vCore, un minimum de 1 W/vCore et un maximum de 10 W/vCore. Le résultat est marqué comme estimé.',
-              'Les profils sont des approximations ; le PUE dépend du fournisseur et le profil de repli peut ne pas correspondre au matériel ou au centre de données.',
+              'Les profils approchent la puissance des instances ; les profils PUE sont des paramètres propres au fournisseur.',
             ],
             [
               'API Boavizta',
               'Entrée facultative d’impact incorporé sur le cycle de vie par type d’instance ; les résultats sont mis en cache et restent distincts de l’énergie opérationnelle.',
               'En l’absence de données d’instance, le repli documenté est un impact incorporé de 100 kg et une durée de vie matérielle supposée de 4 ans.',
-              'Couverture de la source et hypothèses de durée de vie/allocation ; il ne s’agit pas d’un inventaire complet du cycle de vie.',
+              'La couverture et les hypothèses de durée de vie et d’allocation façonnent l’estimation de l’impact incorporé.',
             ],
             [
               'OpenCost',
               'Entrée d’allocation des coûts pour leur visibilité, séparée des équations d’énergie et de carbone.',
-              'La documentation indique que l’absence de données OpenCost peut produire une valeur de coût égale à zéro ; traitez-la comme une couverture manquante, pas comme une absence de coût vérifiée.',
-              'Coûts partagés, règles d’allocation et écarts avec la facturation du fournisseur.',
+              'En l’absence de données OpenCost, le comportement documenté peut produire une valeur de coût égale à zéro.',
+              'Les coûts partagés et les règles d’allocation diffèrent de la facturation du fournisseur.',
             ],
           ],
         },
@@ -354,11 +317,10 @@ export const pages = {
       {
         id: 'energy-model',
         presentation: 'table',
-        eyebrow: 'Modèle énergétique',
-        title:
-          'Le CPU sert de proxy à la puissance du nœud, pas de compteur du pod.',
+        eyebrow: 'Modèle d’énergie opérationnelle',
+        title: 'Estimer l’énergie du nœud à partir de l’utilisation CPU.',
         introduction:
-          'Le modèle publié interpole linéairement entre la puissance minimale et maximale du profil d’instance à partir de l’utilisation CPU. Il n’intègre pas la mémoire, le réseau, le disque ou le GPU dans le calcul énergétique ; les workloads GPU ne sont pas pris en charge par ce modèle.',
+          'Pour chaque nœud, le modèle interpole linéairement entre les puissances minimale et maximale du profil d’instance à partir de l’utilisation CPU. Il multiplie la puissance estimée par la durée d’observation pour calculer l’énergie, puis répartit l’estimation du nœud entre les workloads selon leur part d’utilisation CPU.',
         table: {
           caption: 'Modèle documenté d’énergie opérationnelle',
           headers: ['Étape', 'Calcul', 'Interprétation'],
@@ -381,53 +343,53 @@ export const pages = {
             [
               'Allocation au pod',
               'E_pod = (cpu_pod / cpu_total_node) × E_node',
-              'L’énergie du nœud est répartie selon la part d’utilisation CPU ; cela ne mesure pas la consommation physique d’un pod.',
+              'Répartit l’énergie estimée du nœud entre les workloads selon leur part d’utilisation CPU.',
             ],
           ],
         },
         paragraphs: [
-          'L’utilisation CPU, la qualité du profil, la période d’observation et l’allocation entre pods et nœuds introduisent tous de l’incertitude. Le résultat est une estimation modélisée, pas une lecture matérielle directe.',
+          'L’intensité carbone et le PUE du centre de données sont appliqués à l’estimation d’énergie à l’étape suivante pour calculer le CO₂e opérationnel.',
         ],
       },
       {
         id: 'carbon-model',
         presentation: 'table',
-        eyebrow: 'Carbone opérationnel et cycle de vie',
-        title: 'Distinguez les estimations opérationnelles et incorporées.',
+        eyebrow: 'Calcul carbone',
+        title: 'Convertir l’énergie en CO₂e opérationnel.',
         introduction:
-          'Les équations documentées montrent comment l’implémentation combine l’énergie, l’intensité carbone et le PUE, ainsi que la répartition des données facultatives d’impact incorporé. Elles ne transforment pas une estimation de workload en mesure physique ou en inventaire carbone complet.',
+          'Le CO₂e opérationnel combine l’énergie modélisée, l’intensité carbone et le PUE du centre de données. Lorsque les données Boavizta sont disponibles, l’estimation facultative de l’impact incorporé est calculée séparément et ajoutée au total.',
         table: {
           caption: 'Équations documentées d’estimation carbone',
-          headers: ['Composante', 'Calcul documenté', 'Limite'],
+          headers: ['Composante', 'Calcul documenté', 'Interprétation'],
           rows: [
             [
               'CO₂e opérationnel',
               'CO₂e_g = E_joules / 3 600 000 × intensité_gCO₂e_par_kWh × PUE',
-              'Utilise une énergie modélisée et un facteur d’intensité configuré ou de repli ; le PUE représente les frais généraux du site.',
+              'Utilise l’énergie estimée, le facteur d’intensité configuré ou le repli documenté, et le profil PUE.',
             ],
             [
               'Impact incorporé',
               '(GWP_kg × 1 000 / durée_de_vie_heures) × (durée_pod_secondes / 3 600) × (CPU_pod / CPU_nœud)',
-              'Utilise les données d’instance Boavizta lorsqu’elles existent ; le repli documenté est un GWP de 100 kg et une durée de vie de 4 ans.',
+              'Utilise les données d’instance Boavizta disponibles ; le repli documenté est de 100 kg de GWP et une durée de vie de 4 ans.',
             ],
             [
               'Total combiné',
               'Estimation opérationnelle plus estimation incorporée lorsque cette dernière est disponible',
-              'Ne constitue pas un inventaire complet de tous les services cloud, de toutes les étapes du cycle de vie ou des émissions de l’organisation.',
+              'Ajoute l’estimation de l’impact incorporé lorsqu’elle est disponible.',
             ],
           ],
         },
         paragraphs: [
-          'Les profils PUE sont des paramètres de configuration, pas des mesures de chaque centre de données. La documentation de référence présente actuellement des valeurs différentes pour OVH dans deux sections méthodologiques ; cette page évite donc de publier des valeurs par fournisseur avant la réconciliation de ces références.',
+          'Les profils PUE des fournisseurs apportent le facteur de frais généraux utilisé dans le calcul opérationnel.',
         ],
       },
       {
         id: 'pipeline',
         presentation: 'data-flow',
         eyebrow: 'Agrégation',
-        title: 'De la télémétrie à une estimation répartie.',
+        title: 'Comment les données deviennent des estimations.',
         introduction:
-          'Cette vue décrit des dépendances de données ; elle ne représente ni un instrument de précision ni un inventaire physique complet. La disponibilité de chaque entrée dépend du support documenté et de la configuration.',
+          'La télémétrie et les données des fournisseurs alimentent le modèle d’énergie du nœud, le calcul carbone et la répartition aux workloads. La répartition des coûts reste distincte.',
         code: {
           filename: 'flux-estimation.txt',
           lines: [
@@ -435,27 +397,28 @@ export const pages = {
             'Profil d’instance CCF + PUE fournisseur',
             'Intensité réseau Electricity Maps / Wattnet',
             'Données incorporées Boavizta si disponibles',
-            'Allocation OpenCost (vue des coûts distincte)',
             '                 ↓',
             '      Normalisation des données disponibles',
             '                 ↓',
-            '      Allocation aux workloads',
+            '      Estimation énergie du nœud / CO₂e',
             '                 ↓',
-            '      Estimations d’énergie / CO₂e',
+            '      Allocation aux workloads',
+            '',
+            'OpenCost → répartition des coûts séparée',
           ],
         },
         paragraphs: [
-          'Le modèle opérationnel fondé sur le CPU est un proxy. L’intensité carbone et les éventuelles données d’infrastructure ou de cycle de vie prises en charge ajoutent des hypothèses ; l’allocation aux workloads répartit des sorties de modèle au lieu de mesurer directement chaque workload.',
-          'L’absence d’une source ne signifie pas une énergie ou des émissions nulles. Consultez la documentation pour savoir si un repli configuré est utilisé, si l’estimation est indisponible ou si la couverture est réduite.',
+          'L’utilisation CPU et les profils d’instances produisent l’estimation d’énergie. L’intensité carbone et le PUE la convertissent en CO₂e opérationnel ; les données Boavizta facultatives ajoutent l’impact incorporé. Le contexte Kubernetes et la part d’utilisation CPU servent à répartir les résultats aux workloads, tandis qu’OpenCost fournit une vue distincte des coûts.',
+          'Le tableau des sources récapitule les disponibilités et les replis documentés. Les références techniques ci-dessous détaillent la configuration des sources et leur implémentation.',
         ],
       },
       {
         id: 'fallbacks',
         presentation: 'steps',
-        eyebrow: 'Données manquantes',
-        title: 'Le comportement de repli fait partie du résultat.',
+        eyebrow: 'Comportement de repli',
+        title: 'Comment les entrées indisponibles sont traitées.',
         introduction:
-          'Les replis ne sont pas des valeurs par défaut interchangeables. Vérifiez le comportement pris en charge pour la configuration de source.',
+          'Chaque entrée prise en charge a un repli documenté ou un comportement défini en cas d’absence de données. Le fournisseur configuré et les motifs d’estimation indiquent le chemin utilisé.',
         items: [
           {
             title: 'Repli d’intensité carbone',
@@ -475,28 +438,17 @@ export const pages = {
           {
             title: 'Données d’allocation des coûts manquantes',
             description:
-              'La documentation technique indique que l’absence de données OpenCost peut apparaître comme un coût nul. Cela ne prouve pas qu’un workload n’a aucun coût.',
+              'En l’absence de données OpenCost, le comportement documenté peut produire une valeur de coût égale à zéro ; vérifiez la disponibilité des données avant d’interpréter cette valeur.',
           },
-        ],
-      },
-      {
-        id: 'uncertainty',
-        presentation: 'callout',
-        eyebrow: 'Limites',
-        title: 'Lisez le modèle, pas seulement le résultat.',
-        paragraphs: [
-          'Une demande CPU plus basse ne signifie pas automatiquement une consommation électrique moindre. Elle peut améliorer l’efficacité de capacité sans réduire immédiatement la facture cloud.',
-          'Le CO₂e au niveau d’un workload est une estimation répartie, pas une mesure directe de l’électricité consommée par un pod individuel. Les résultats dépendent de la qualité et de la fraîcheur des sources, de leur périmètre géographique, des hypothèses du modèle et de l’allocation.',
-          'La mémoire, le réseau, le disque et le GPU ne sont pas inclus dans le modèle énergétique actuel ; les workloads GPU ne sont pas pris en charge par celui-ci. Certaines classes de ressources et possibilités liées aux ressources orphelines restent centrées sur les coûts plutôt que sur une mesure complète de l’énergie. N’inférez pas une intégration Kepler ou autre télémétrie énergétique directe.',
         ],
       },
       {
         id: 'example-calculation',
         presentation: 'table',
-        eyebrow: 'Calcul illustratif',
-        title: 'Un exemple chiffré avec les valeurs de repli documentées.',
+        eyebrow: 'Exemple de calcul',
+        title: 'Un calcul détaillé avec les valeurs de repli documentées.',
         introduction:
-          'Ce calcul illustre une opération arithmétique ; ce n’est ni un benchmark ni un workload mesuré. Le profil de repli, le PUE et l’intensité globale sont des valeurs par défaut documentées ; une utilisation CPU de 50 % pendant une heure est une donnée d’exemple, pas une valeur par défaut de GreenKube.',
+          'Cet exemple associe le profil documenté d’instance inconnue, un PUE de 1,3 et une intensité globale de 500 gCO₂e/kWh à une utilisation CPU de 50 % pendant une heure pour illustrer le calcul.',
         table: {
           caption:
             'Estimation opérationnelle d’un nœud sur la période illustrée',
@@ -516,18 +468,18 @@ export const pages = {
           ],
         },
         paragraphs: [
-          'Le résultat utilise le repli global d’intensité et le profil d’instance inconnue documentés. Ce n’est pas une mesure physique propre à un pod ; l’impact incorporé n’est pas inclus et aucune économie n’est démontrée. Les valeurs des pods sont réparties depuis l’énergie du nœud selon leur part d’utilisation CPU.',
+          'Le résultat opérationnel est de 3,575 gCO₂e pour la période illustrée du nœud. L’impact incorporé n’est pas inclus ; les valeurs des workloads sont réparties à partir de l’énergie du nœud selon la part d’utilisation CPU.',
         ],
       },
       {
         id: 'methodology',
         presentation: 'prose',
-        eyebrow: 'Pour aller plus loin',
-        title: 'La documentation précise le comportement.',
+        eyebrow: 'Références techniques',
+        title: 'Explorer les détails d’implémentation.',
         introduction:
-          'Les équations et valeurs de repli de cette page sont reprises de la documentation méthodologique publiée. Les fournisseurs, la configuration et la couverture des sources varient encore selon les déploiements.',
+          'La documentation technique détaille les équations, les sources prises en charge, la configuration des fournisseurs et les comportements de repli présentés sur cette page.',
         paragraphs: [
-          'Pour connaître le comportement applicable à un déploiement, consultez la documentation de référence et vérifiez la liste des sources, les options de configuration, les replis et les limites du modèle.',
+          'Consultez ces références pour examiner le comportement de l’implémentation et configurer les sources utilisées par un déploiement.',
         ],
         links: [
           {
@@ -543,6 +495,46 @@ export const pages = {
             href: 'https://docs.greenkube.cloud/guide/wattnet/',
           },
           { label: 'Découvrir la méthode générale', page: 'method' },
+        ],
+      },
+      {
+        id: 'limitations',
+        presentation: 'cards',
+        eyebrow: 'Limites',
+        title: 'Périmètre des estimations et points de vigilance.',
+        introduction:
+          'Ces limites précisent les entrées du modèle et la manière d’interpréter un résultat au regard de la couverture des sources.',
+        items: [
+          {
+            title: 'Modèle énergétique fondé sur le CPU',
+            description:
+              'L’énergie du nœud est estimée en interpolant l’utilisation CPU entre les valeurs minimale et maximale du profil d’instance. Il ne s’agit pas d’une lecture directe de la puissance du matériel, du nœud, du conteneur ou du pod ; la mémoire, le réseau, le disque et le GPU n’entrent pas dans le calcul énergétique actuel.',
+          },
+          {
+            title: 'Allocation aux workloads',
+            description:
+              'L’énergie et le CO₂e des workloads sont répartis à partir des estimations du nœud selon la part d’utilisation CPU. L’infrastructure partagée, la propriété incomplète, les lacunes d’échantillonnage, les hypothèses de profil, la fraîcheur des sources, la correspondance géographique et le PUE influent sur les résultats.',
+          },
+          {
+            title: 'Sources d’intensité carbone',
+            description:
+              'Les données des fournisseurs et les replis documentés ne représentent pas le mix électrique exact d’un site. Wattnet documente 52 zones européennes à une résolution de 15 minutes ; les autres fournisseurs diffèrent par leur couverture, fraîcheur et méthode. Une source absente ne signifie pas une énergie ou des émissions nulles.',
+          },
+          {
+            title: 'Profils d’instances et PUE',
+            description:
+              'Les profils d’instances approchent la puissance et les profils PUE des fournisseurs apportent les frais généraux du site. La documentation présente actuellement des valeurs PUE OVH contradictoires dans deux sections ; cette page ne publie donc pas de valeur propre à OVH.',
+          },
+          {
+            title: 'Estimation de l’impact incorporé',
+            description:
+              'La composante facultative utilise les données d’instance Boavizta ou le repli documenté de 100 kg sur quatre ans. Elle ne constitue pas un inventaire complet des services cloud, des étapes du cycle de vie ou des émissions d’une organisation.',
+          },
+          {
+            title: 'Coûts et résultats observés',
+            description:
+              'OpenCost est une entrée distincte de répartition des coûts ; en l’absence de données, une valeur nulle peut apparaître. Une réduction projetée ne démontre pas une baisse d’électricité ni des économies réalisées : comparez les signaux après changement et rapprochez les coûts de la facturation du fournisseur.',
+          },
         ],
       },
     ],
@@ -563,7 +555,7 @@ export const pages = {
         { label: 'Essayer la démo', href: 'https://demo.greenkube.cloud/' },
         {
           label: 'Lire la documentation',
-          href: 'https://docs.greenkube.cloud/',
+          href: 'https://docs.greenkube.cloud/getting-started/quickstart/',
         },
       ],
     },
@@ -677,7 +669,7 @@ export const pages = {
         links: [
           {
             label: 'Consulter le guide des intégrations',
-            href: 'https://docs.greenkube.cloud/',
+            href: 'https://docs.greenkube.cloud/getting-started/configuration/',
           },
         ],
       },
@@ -697,7 +689,7 @@ export const pages = {
       actions: [
         {
           label: 'Lire la documentation technique',
-          href: 'https://docs.greenkube.cloud/',
+          href: 'https://docs.greenkube.cloud/architecture/overview/',
         },
         { label: 'Voir la méthodologie carbone', page: 'carbon' },
       ],
@@ -799,7 +791,7 @@ export const pages = {
         links: [
           {
             label: 'Ouvrir la documentation GreenKube',
-            href: 'https://docs.greenkube.cloud/',
+            href: 'https://docs.greenkube.cloud/getting-started/configuration/',
           },
           {
             label: 'Consulter les versions',
@@ -852,7 +844,7 @@ export const pages = {
           },
           {
             label: 'Lire la documentation technique',
-            href: 'https://docs.greenkube.cloud/',
+            href: 'https://docs.greenkube.cloud/getting-started/introduction/',
           },
         ],
       },
@@ -934,7 +926,7 @@ export const pages = {
         },
         {
           label: 'Lire la documentation',
-          href: 'https://docs.greenkube.cloud/',
+          href: 'https://docs.greenkube.cloud/getting-started/quickstart/',
         },
       ],
     },

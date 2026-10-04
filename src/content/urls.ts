@@ -1,6 +1,6 @@
 export const externalUrls = {
   github: 'https://github.com/GreenKubeCloud/GreenKube',
-  docs: 'https://docs.greenkube.cloud/',
+  docs: 'https://docs.greenkube.cloud/getting-started/introduction/',
   demo: 'https://demo.greenkube.cloud/',
   discussions: 'https://github.com/GreenKubeCloud/GreenKube/discussions',
   issues: 'https://github.com/GreenKubeCloud/GreenKube/issues',

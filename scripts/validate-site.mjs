@@ -192,6 +192,12 @@ for (const route of pageRoutes) {
     if (!href || href.startsWith('mailto:') || href.startsWith('tel:'))
       continue;
     const targetUrl = new URL(href, currentUrl);
+    if (targetUrl.hostname === 'docs.greenkube.cloud') {
+      report(
+        targetUrl.pathname !== '/',
+        `${route} links to the documentation homepage instead of a subsection`,
+      );
+    }
     if (targetUrl.origin !== origin) continue;
 
     if (targetUrl.pathname === currentUrl.pathname && targetUrl.hash) {
@@ -231,6 +237,19 @@ for (const [route, html] of htmlByRoute) {
   report(
     !releaseStatusPattern.test(html),
     `${route} contains version-specific availability labels`,
+  );
+}
+
+for (const locale of locales) {
+  const homeSections = sectionIdsByRoute.get(`/${locale}/`) ?? [];
+  report(
+    !homeSections.includes('outcomes'),
+    `${locale} homepage still contains the outcomes section`,
+  );
+  const carbonSections = sectionIdsByRoute.get(`/${locale}/carbon/`) ?? [];
+  report(
+    carbonSections.at(-1) === 'limitations',
+    `${locale} carbon page must end with its limitations section`,
   );
 }
 
@@ -331,7 +350,7 @@ if (llms) {
     `${origin}/en/method/`,
     `${origin}/en/community/`,
     `${origin}/en/services/`,
-    'https://docs.greenkube.cloud/',
+    'https://docs.greenkube.cloud/getting-started/introduction/',
     'https://demo.greenkube.cloud/',
     'https://github.com/GreenKubeCloud/GreenKube',
   ]) {

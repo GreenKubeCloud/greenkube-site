@@ -45,7 +45,10 @@ export const pages: Record<PageId, PageContent> = {
           label: 'View the project on GitHub',
           href: 'https://github.com/GreenKubeCloud/GreenKube',
         },
-        { label: 'Install with Helm', href: 'https://docs.greenkube.cloud/' },
+        {
+          label: 'Install with Helm',
+          href: 'https://docs.greenkube.cloud/getting-started/quickstart/',
+        },
       ],
     },
     sections: [
@@ -63,7 +66,7 @@ export const pages: Record<PageId, PageContent> = {
         links: [
           {
             label: 'Read the documentation',
-            href: 'https://docs.greenkube.cloud/',
+            href: 'https://docs.greenkube.cloud/getting-started/introduction/',
           },
           {
             label: 'Review releases',
@@ -100,44 +103,6 @@ export const pages: Record<PageId, PageContent> = {
               'Check applied changes and compare post-change signals with the original estimates and evidence.',
           },
         ],
-      },
-      {
-        id: 'outcomes',
-        presentation: 'table',
-        eyebrow: 'Interpretation',
-        title: 'Keep estimates separate from outcomes.',
-        introduction:
-          'Projected impact, observed changes and verified results are different kinds of information. Estimates and reports do not guarantee savings.',
-        table: {
-          caption: 'What the terms mean on this site',
-          headers: ['Term', 'Meaning'],
-          rows: [
-            [
-              'Projected',
-              'Potential impact estimated before a change; it is a projection, not a guarantee.',
-            ],
-            [
-              'Applied',
-              'A change detected or recorded in the target environment.',
-            ],
-            [
-              'Measured',
-              'Post-change signals observed over time; they are not an invoice or a physical energy measurement.',
-            ],
-            [
-              'Verified',
-              'An outcome checked against defined evidence or health gates; verification does not guarantee savings.',
-            ],
-            [
-              'Estimate',
-              'A modelled or allocated value based on available telemetry and configured inputs; it is not a direct physical measurement.',
-            ],
-            [
-              'Savings',
-              'Not guaranteed. A lower request or estimate does not by itself prove a lower bill or lower energy use.',
-            ],
-          ],
-        },
       },
       {
         id: 'dimensions',
@@ -204,7 +169,7 @@ export const pages: Record<PageId, PageContent> = {
           },
           {
             label: 'Read the documentation',
-            href: 'https://docs.greenkube.cloud/',
+            href: 'https://docs.greenkube.cloud/getting-started/introduction/',
           },
         ],
       },
@@ -228,94 +193,92 @@ export const pages: Record<PageId, PageContent> = {
   },
   carbon: {
     id: 'carbon',
-    title: 'Kubernetes carbon and energy estimates | GreenKube',
+    title: 'How GreenKube estimates Kubernetes energy and carbon | GreenKube',
     description:
-      'Understand how GreenKube presents Kubernetes energy and carbon estimates, including CPU-proxy limits, source coverage, fallbacks, uncertainty and allocation.',
+      'See how GreenKube combines Kubernetes telemetry, instance power profiles, grid-intensity data and workload allocation to estimate energy and carbon.',
     hero: {
-      eyebrow: 'CARBON METHODOLOGY',
-      title: 'Carbon estimates, with their limits in view.',
+      eyebrow: 'ENERGY AND CARBON METHODOLOGY',
+      title: 'How GreenKube estimates Kubernetes energy and carbon.',
       summary:
-        'GreenKube provides Kubernetes energy and carbon visibility through estimates, dashboards and reporting. The operational energy model is CPU-based; its outputs are not direct hardware or pod-level physical measurements.',
-      note: 'Estimates are modelled and allocated. Source availability, fallback behavior and exact defaults depend on configuration; use the documentation for implementation details.',
+        'GreenKube combines CPU telemetry and Kubernetes context with instance power profiles, grid-intensity data and facility PUE. It estimates node energy and operational CO₂e, allocates results to workloads and can include a separate embodied-impact estimate.',
       actions: [
         {
-          label: 'Read the carbon documentation',
-          href: 'https://docs.greenkube.cloud/',
+          label: 'Read the carbon-tracking guide',
+          href: 'https://docs.greenkube.cloud/features/carbon-tracking/',
         },
-        { label: 'See the method overview', page: 'method' },
+        { label: 'Explore the general methodology', page: 'method' },
       ],
     },
     sections: [
       {
         id: 'what-is-estimated',
         presentation: 'prose',
-        eyebrow: 'Boundary',
-        title: 'An estimate is not a physical measurement.',
+        eyebrow: 'Method overview',
+        title: 'From telemetry to workload estimates.',
         introduction:
-          'Separate operational energy estimation, carbon-intensity attribution, workload allocation, cost allocation and any lifecycle impact represented by supported inputs.',
+          'The methodology follows three steps: estimate node energy from CPU utilization and an instance power profile; apply grid intensity and PUE to calculate operational CO₂e; then allocate results across workloads. Optional Boavizta data supplies a separate embodied-impact component.',
         paragraphs: [
-          'The current operational model is CPU-based. CPU telemetry is a proxy used by a model; it is not equivalent to reading power at the server, node, container or pod. GreenKube does not claim complete physical energy accounting for every resource class.',
-          'Workload-level CO₂e is an allocation estimate, not a direct measurement of electricity consumed by an individual pod. Shared infrastructure and incomplete attribution can affect how a total is distributed.',
-          'Cost estimates are a separate allocation view. Neither an allocated cost nor a carbon estimate is an invoice, an assurance statement or proof that a proposed change reduced consumption.',
+          'Prometheus provides CPU utilization, while Kubernetes node and pod metadata supply the context used for instance profiles and workload allocation.',
+          'Operational and embodied impacts are calculated separately. OpenCost supplies a distinct cost-allocation view alongside the energy and carbon estimates.',
         ],
       },
       {
         id: 'inputs',
         presentation: 'table',
-        eyebrow: 'Sources and inputs',
-        title: 'What an input can—and cannot—tell you.',
+        eyebrow: 'Data sources',
+        title: 'Inputs that build the estimate.',
         introduction:
-          'The methodology documentation names the sources below. Whether a provider API has usable data still depends on configuration, credentials and coverage. The availability column distinguishes built-in inputs from selectable or optional sources.',
+          'Prometheus CPU telemetry and Kubernetes metadata anchor the operational model. Grid-intensity providers, instance profiles and PUE add geographic and facility context. Boavizta can provide lifecycle data, while OpenCost supports separate cost allocation. The table summarizes source roles and documented availability and fallback behavior.',
         table: {
-          caption: 'Documented sources, roles, fallbacks and uncertainty',
+          caption: 'Sources, roles and documented fallback behavior',
           headers: [
             'Source',
-            'Role and availability',
-            'Fallback or missing-data behavior',
-            'Uncertainty to consider',
+            'Role in the methodology',
+            'Availability and fallback',
+            'Coverage and assumptions',
           ],
           rows: [
             [
               'Prometheus',
-              'Released CPU telemetry input to the operational-energy model; other metrics may be collected but are not factored into that model.',
+              'CPU utilization is the activity input to the operational-energy model. Other metrics may be collected but do not enter that calculation.',
               'Coverage depends on the configured scrape data and selected time window. Defaults used by the model are marked estimated with reasons.',
-              'Sampling gaps and the CPU-to-power proxy. Memory, network, disk and GPU are not included in the energy model.',
+              'Sampling gaps affect the input coverage; CPU utilization is used to estimate power from an instance profile.',
             ],
             [
               'Kubernetes API',
               'Node metadata and pod specifications provide workload and instance context for estimates and allocation.',
               'Missing or unsupported context can limit attribution; consult the documentation for supported fields.',
-              'Shared nodes, incomplete ownership and mismatch between workload context and physical infrastructure.',
+              'Shared nodes and incomplete ownership affect how node-level results are allocated.',
             ],
             [
               'Electricity Maps',
               'Default grid-intensity provider for location- and time-dependent carbon factors.',
               'If provider data is unavailable, documented per-zone defaults are used; the global fallback is 500 gCO₂e/kWh when no zone default exists.',
-              'Zone mapping, API availability, source freshness and the difference between a regional average and actual electricity supply.',
+              'Results depend on zone mapping and data freshness; a regional factor can differ from the electricity used at a particular facility.',
             ],
             [
               'Wattnet',
               'Optional alternative grid-intensity provider documented for 52 European zones at 15-minute resolution.',
               'Provider selection and credentials are configuration-dependent; use the documented fallback behavior if data is unavailable.',
-              'Geographic coverage is limited, and temporal resolution and source methodology differ from other providers.',
+              'Its documented geographic coverage, temporal resolution and method differ from other providers.',
             ],
             [
               'Built-in CCF profiles and PUE',
               'Static instance power profiles inform the CPU model; provider PUE profiles represent facility overhead.',
               'For an unknown instance, documented fallback values are PUE 1.3, 1 vCore, 1 W/vCore minimum and 10 W/vCore maximum. The result is marked estimated.',
-              'Profiles are approximations, PUE is provider-specific, and a fallback profile may not match the hardware or facility.',
+              'Profiles approximate instance power; PUE profiles are provider-specific inputs.',
             ],
             [
               'Boavizta API',
               'Optional instance lifecycle/embodied-impact input; results are cached and kept separate from operational energy.',
               'When instance data is unavailable, the documented fallback is 100 kg embodied impact with a 4-year hardware lifespan assumption.',
-              'Source coverage and the lifespan/allocation assumptions; this is not a complete lifecycle inventory.',
+              'Coverage and the lifespan and allocation assumptions shape the embodied-impact estimate.',
             ],
             [
               'OpenCost',
               'Cost-allocation input for cost visibility, separate from the energy and carbon equations.',
-              'The documentation says unavailable OpenCost data can result in a cost value of zero; treat that as missing coverage, not verified zero cost.',
-              'Shared costs, allocation rules and differences from provider billing.',
+              'When OpenCost data is unavailable, the documented behavior can report a cost value of zero.',
+              'Shared costs and allocation rules differ from provider billing.',
             ],
           ],
         },
@@ -349,10 +312,10 @@ export const pages: Record<PageId, PageContent> = {
       {
         id: 'energy-model',
         presentation: 'table',
-        eyebrow: 'Energy model',
-        title: 'CPU is a proxy for node power—not a pod meter.',
+        eyebrow: 'Operational-energy model',
+        title: 'Estimating node energy from CPU utilization.',
         introduction:
-          'The operational model linearly interpolates between idle and maximum instance-profile power using CPU utilization. It does not use memory, network, disk or GPU metrics in the energy calculation; GPU workloads are not supported by that model.',
+          'For each node, the model linearly interpolates between idle and maximum power in its instance profile using CPU utilization. It multiplies estimated power by the observation window to calculate energy, then allocates the node estimate across workloads by CPU share.',
         table: {
           caption: 'Documented operational-energy model',
           headers: ['Step', 'Calculation', 'Interpretation'],
@@ -375,53 +338,53 @@ export const pages: Record<PageId, PageContent> = {
             [
               'Pod allocation',
               'E_pod = (cpu_pod / cpu_total_node) × E_node',
-              'Node energy is allocated by CPU usage share; this does not measure a pod’s physical electricity use.',
+              'Distributes estimated node energy across workloads by CPU usage share.',
             ],
           ],
         },
         paragraphs: [
-          'CPU utilization, profile quality, observation windows and pod-to-node allocation all introduce uncertainty. Treat the output as a modelled estimate, not a direct hardware reading.',
+          'Grid intensity and facility PUE are applied to the energy estimate in the next step to calculate operational CO₂e.',
         ],
       },
       {
         id: 'carbon-model',
         presentation: 'table',
-        eyebrow: 'Carbon and lifecycle inputs',
-        title: 'Keep operational and embodied estimates distinct.',
+        eyebrow: 'Carbon calculation',
+        title: 'Converting energy into operational CO₂e.',
         introduction:
-          'The documented equations show how the implementation combines energy with carbon intensity and PUE, and how optional embodied-impact data is allocated. They do not turn a workload estimate into a physical measurement or complete carbon inventory.',
+          'Operational CO₂e combines modeled energy with grid intensity and facility PUE. When Boavizta data is available, the optional embodied-impact estimate is calculated separately and included in the combined value.',
         table: {
           caption: 'Documented carbon-estimation equations',
-          headers: ['Component', 'Documented calculation', 'Boundary'],
+          headers: ['Component', 'Documented calculation', 'How to read it'],
           rows: [
             [
               'Operational CO₂e',
               'CO₂e_g = E_joules / 3,600,000 × intensity_gCO₂e_per_kWh × PUE',
-              'Uses modelled energy and a configured or fallback grid-intensity factor; PUE accounts for facility overhead.',
+              'Uses estimated energy, the configured or documented fallback intensity factor, and the PUE profile.',
             ],
             [
               'Embodied impact',
               '(GWP_kg × 1,000 / lifespan_hours) × (pod_duration_seconds / 3,600) × (pod_CPU_cores / node_CPU_cores)',
-              'Uses Boavizta instance data where available; documented fallback is 100 kg GWP and a 4-year lifespan.',
+              'Uses Boavizta instance data where available; the documented fallback is 100 kg GWP and a 4-year lifespan.',
             ],
             [
               'Combined total',
               'Operational estimate plus embodied estimate where the latter is available',
-              'Not a complete inventory of every cloud service, lifecycle stage or organizational emission.',
+              'Adds the embodied-impact estimate when it is available.',
             ],
           ],
         },
         paragraphs: [
-          'Provider PUE profiles are configuration inputs, not measurements of every facility. The canonical documentation currently lists different OVH values in separate methodology sections, so this page avoids publishing provider-specific numbers until those references are reconciled.',
+          'Provider PUE profiles supply the facility-overhead factor used in the operational calculation.',
         ],
       },
       {
         id: 'pipeline',
         presentation: 'data-flow',
         eyebrow: 'Aggregation',
-        title: 'From telemetry to an allocated estimate.',
+        title: 'How the inputs become reported estimates.',
         introduction:
-          'This is a conceptual view of data dependencies, not a precision instrument or a complete physical inventory. The presence of an input depends on documented support and configuration.',
+          'Configured telemetry and provider inputs feed the node-energy model, carbon calculation and workload allocation. The cost-allocation path remains separate.',
         code: {
           filename: 'estimate-flow.txt',
           lines: [
@@ -429,27 +392,28 @@ export const pages: Record<PageId, PageContent> = {
             'CCF instance profile + provider PUE',
             'Electricity Maps / Wattnet grid intensity',
             'Boavizta embodied data where available',
-            'OpenCost allocation (separate cost view)',
             '                 ↓',
             '       Normalize available inputs',
             '                 ↓',
-            '       Allocate to workloads',
+            '       Estimate node energy / CO₂e',
             '                 ↓',
-            '       Energy / CO₂e estimates',
+            '       Allocate to workloads',
+            '',
+            'OpenCost → separate cost allocation',
           ],
         },
         paragraphs: [
-          'The CPU-based operational model is a proxy. Carbon intensity and any supported infrastructure or lifecycle inputs contribute assumptions; workload allocation distributes model outputs rather than measuring each workload directly.',
-          'A missing source is not evidence of zero energy or zero emissions. Read the documentation to determine whether a configured fallback is used, an estimate is unavailable, or coverage is reduced.',
+          'CPU utilization and instance profiles produce estimated energy. Grid intensity and PUE convert that result to operational CO₂e; optional Boavizta inputs add embodied impact. Kubernetes context and CPU share support workload allocation, while OpenCost supplies a separate cost view.',
+          'The source table lists documented availability and fallback behavior. The technical references below explain source configuration and implementation details.',
         ],
       },
       {
         id: 'fallbacks',
         presentation: 'steps',
-        eyebrow: 'Missing data',
-        title: 'Treat fallback behavior as part of the result.',
+        eyebrow: 'Fallback behavior',
+        title: 'How unavailable inputs are handled.',
         introduction:
-          'Fallbacks are not interchangeable defaults. The supported behavior depends on the source configuration.',
+          'Each supported input has a documented fallback or missing-data behavior. The configured provider and estimation reasons identify which path contributed to a result.',
         items: [
           {
             title: 'Grid-intensity fallback',
@@ -469,28 +433,17 @@ export const pages: Record<PageId, PageContent> = {
           {
             title: 'Missing cost allocation',
             description:
-              'The technical documentation notes that unavailable OpenCost data can appear as cost zero. That is not proof that a workload has no cost.',
+              'When OpenCost data is unavailable, the documented behavior can report a cost value of zero; check data availability before interpreting that value.',
           },
-        ],
-      },
-      {
-        id: 'uncertainty',
-        presentation: 'callout',
-        eyebrow: 'Limitations',
-        title: 'Read the model, not just the output.',
-        paragraphs: [
-          'A lower CPU request does not automatically mean lower electricity consumption. A lower request may improve capacity efficiency without immediately reducing the cloud invoice.',
-          'Workload-level CO₂e is an allocation estimate, not a direct measurement of electricity consumed by an individual pod. Results depend on source quality, freshness, geographic scope, model assumptions and allocation.',
-          'Memory, network, disk and GPU metrics are not included in the current energy model; GPU workloads are not supported by it. Some resource classes and orphaned-resource opportunities are cost-focused rather than full energy measurements. Do not infer a Kepler or other direct energy-telemetry integration.',
         ],
       },
       {
         id: 'example-calculation',
         presentation: 'table',
-        eyebrow: 'Illustrative arithmetic',
-        title: 'A worked example using documented fallback values.',
+        eyebrow: 'Example calculation',
+        title: 'A worked calculation with documented fallback values.',
         introduction:
-          'This is an illustrative calculation, not a benchmark or measured workload. The fallback profile, PUE and global intensity are documented defaults; 50% CPU utilization held for one hour is an example input, not a GreenKube default.',
+          'This example combines the documented unknown-instance profile, PUE 1.3 and global intensity of 500 gCO₂e/kWh with 50% CPU utilization for one hour to show the calculation.',
         table: {
           caption: 'One-node operational estimate for the example window',
           headers: ['Step', 'Inputs', 'Result'],
@@ -509,18 +462,18 @@ export const pages: Record<PageId, PageContent> = {
           ],
         },
         paragraphs: [
-          'The result uses the global intensity fallback and the documented unknown-instance profile defaults. It is not a pod-specific physical measurement, does not include an embodied-impact component, and does not establish savings. Pod values are allocated from node energy by CPU usage share.',
+          'The operational result is 3.575 gCO₂e for the example node window. It excludes embodied impact; workload-level values are allocated from node energy by CPU share.',
         ],
       },
       {
         id: 'methodology',
         presentation: 'prose',
-        eyebrow: 'Further reading',
-        title: 'Use the methodology documentation for exact behavior.',
+        eyebrow: 'Technical references',
+        title: 'Explore the implementation details.',
         introduction:
-          'Model equations and fallback values on this page are transcribed from the published methodology documentation. Provider data, configuration and source coverage still vary by deployment.',
+          'The technical documentation describes the equations, supported sources, provider setup and fallback behavior behind the calculations on this page.',
         paragraphs: [
-          'For the implementation details that apply to a deployment, use the canonical documentation and verify its source list, configuration options, fallback rules and model boundaries against the deployed software.',
+          'Use these references to inspect implementation behavior and configure the sources used by a deployment.',
         ],
         links: [
           {
@@ -536,6 +489,46 @@ export const pages: Record<PageId, PageContent> = {
             href: 'https://docs.greenkube.cloud/guide/wattnet/',
           },
           { label: 'Explore the general method', page: 'method' },
+        ],
+      },
+      {
+        id: 'limitations',
+        presentation: 'cards',
+        eyebrow: 'Limitations',
+        title: 'What the estimates cover—and where they stop.',
+        introduction:
+          'These boundaries describe the model inputs and how to interpret a reported value alongside its source coverage.',
+        items: [
+          {
+            title: 'CPU-based energy model',
+            description:
+              'Node energy is estimated by interpolating CPU utilization between an instance profile’s idle and maximum values. This is not a direct power reading from hardware, a node, container or pod; memory, network, disk and GPU do not enter the current energy calculation.',
+          },
+          {
+            title: 'Workload allocation',
+            description:
+              'Workload energy and CO₂e are allocated from node estimates using CPU share. Shared infrastructure, incomplete ownership, scrape gaps, profile assumptions, source freshness, location mapping and PUE affect the result.',
+          },
+          {
+            title: 'Grid-intensity sources',
+            description:
+              'Provider data and documented fallbacks do not represent the exact electricity mix at a facility. Wattnet documents 52 European zones at 15-minute resolution; other providers differ in coverage, freshness and method. A missing source does not mean zero energy or emissions.',
+          },
+          {
+            title: 'Instance profiles and PUE',
+            description:
+              'Instance profiles approximate power and provider PUE profiles supply facility overhead. The documentation currently lists conflicting OVH PUE values in separate sections, so this page does not assert one OVH-specific value.',
+          },
+          {
+            title: 'Embodied-impact estimate',
+            description:
+              'The optional component uses Boavizta instance data or its documented 100 kg / four-year fallback. It is not a complete inventory of every cloud service, lifecycle stage or organizational emission.',
+          },
+          {
+            title: 'Costs and observed outcomes',
+            description:
+              'OpenCost is a separate cost-allocation input; when its data is unavailable, a cost value may appear as zero. A projected reduction does not establish lower electricity use or realized savings: compare post-change signals and reconcile costs with provider billing.',
+          },
         ],
       },
     ],
@@ -555,7 +548,7 @@ export const pages: Record<PageId, PageContent> = {
         { label: 'Try the demo', href: 'https://demo.greenkube.cloud/' },
         {
           label: 'Read the documentation',
-          href: 'https://docs.greenkube.cloud/',
+          href: 'https://docs.greenkube.cloud/getting-started/quickstart/',
         },
       ],
     },
@@ -669,7 +662,7 @@ export const pages: Record<PageId, PageContent> = {
         links: [
           {
             label: 'Check the integration guide',
-            href: 'https://docs.greenkube.cloud/',
+            href: 'https://docs.greenkube.cloud/getting-started/configuration/',
           },
         ],
       },
@@ -689,7 +682,7 @@ export const pages: Record<PageId, PageContent> = {
       actions: [
         {
           label: 'Read the technical documentation',
-          href: 'https://docs.greenkube.cloud/',
+          href: 'https://docs.greenkube.cloud/architecture/overview/',
         },
         { label: 'Explore carbon methodology', page: 'carbon' },
       ],
@@ -788,7 +781,7 @@ export const pages: Record<PageId, PageContent> = {
         links: [
           {
             label: 'Open GreenKube documentation',
-            href: 'https://docs.greenkube.cloud/',
+            href: 'https://docs.greenkube.cloud/getting-started/configuration/',
           },
           {
             label: 'View releases',
@@ -841,7 +834,7 @@ export const pages: Record<PageId, PageContent> = {
           },
           {
             label: 'Read the technical documentation',
-            href: 'https://docs.greenkube.cloud/',
+            href: 'https://docs.greenkube.cloud/getting-started/introduction/',
           },
         ],
       },
@@ -923,7 +916,7 @@ export const pages: Record<PageId, PageContent> = {
         },
         {
           label: 'Read the documentation',
-          href: 'https://docs.greenkube.cloud/',
+          href: 'https://docs.greenkube.cloud/getting-started/quickstart/',
         },
       ],
     },

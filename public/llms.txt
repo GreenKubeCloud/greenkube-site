@@ -14,7 +14,7 @@ GreenKube is an open-source Kubernetes project for cost visibility and estimated
 - [Optional services](https://greenkube.cloud/en/services/)
 
 ## Public resources
-- [Technical documentation](https://docs.greenkube.cloud/)
+- [Technical documentation](https://docs.greenkube.cloud/getting-started/introduction/)
 - [Interactive demo](https://demo.greenkube.cloud/)
 - [GitHub repository](https://github.com/GreenKubeCloud/GreenKube)
 - [GitHub discussions](https://github.com/GreenKubeCloud/GreenKube/discussions)
